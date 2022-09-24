@@ -1,0 +1,25 @@
+#Login_box
+{
+   position: absolute;
+   border: solid black 2px; 
+   border-style: dotted dashed solid double;
+   border-radius: 10px;
+   margin-top: 18%;
+   margin-left: 35%;
+   width: 500px;
+   height: 210px; 
+   padding-left: 20px;
+   padding-top: 40px;
+   background-color: rgba(206, 255, 255, 0.915);
+}
+
+#login_table tr,td
+{
+    margin: 20px;
+
+}
+
+body
+{
+    background-image: url("/GUI_Resources/Background.jpg");
+}
