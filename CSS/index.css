@@ -7,16 +7,21 @@
    margin-top: 18%;
    margin-left: 35%;
    width: 500px;
-   height: 210px; 
+   height: 250px; 
    padding-left: 20px;
    padding-top: 40px;
    background-color: rgba(206, 255, 255, 0.915);
 }
-
+#Top_Bar
+{
+    width: 100%;
+    height: 60px;
+    background-color:  rgba(255, 255, 255, 0.915);
+}
 #login_table tr,td
 {
     margin: 20px;
-
+    /* border: solid; */
 }
 
 body
