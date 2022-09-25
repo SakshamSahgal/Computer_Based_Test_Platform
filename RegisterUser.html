@@ -3,13 +3,16 @@
     <title>Register User</title>
 </head>
 <body>
+    <link rel="stylesheet" href="CSS/RegisterUser.css">
+    <div id="Top_Bar"> <h2 style="text-align:center ; padding-top: 15px;"> REGISTER USER </h2></div>
     <button id="back_button"> Back </button>
-    <table>
-        <tr><td>User_Type : <input type="radio" name="input_as" id="input_as_Student" checked> Student <input type="radio" name="input_as" id="input_as_Problem_Setter"> Problem_Setter</td></tr>
-        <tr><td> User ID : <input type="number" id="input_user_id"></td></tr>
-        <tr><td>Name : <input type="text" id="input_name"></td></tr>
-        <tr><td>Password : <input type="password" id="input_password"></td></tr>
-        <tr><td><button id="Register_btn"> Register </button></td></tr>
+    <table id="Register_User_table">
+        <tr><td style="text-align: center;"> <b>REGISTER USER</b></td></tr>
+        <tr><td style="text-align: center;"> <b>User_Type :</b> <input type="radio" name="input_as" id="input_as_Student" checked> Student <input type="radio" name="input_as" id="input_as_Problem_Setter"> Problem_Setter</td></tr>
+        <tr><td style="text-align: center;"> User ID : <input type="number" id="input_user_id"></td></tr>
+        <tr><td style="text-align: center;">Name : <input type="text" id="input_name"></td></tr>
+        <tr><td style="text-align: center;">Password : <input type="password" id="input_password"></td></tr>
+        <tr><td style="text-align: center;"><button id="Register_btn"> Register </button></td></tr>
     </table>
 </body>
 <script type="module">

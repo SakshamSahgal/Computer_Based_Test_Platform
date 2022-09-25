@@ -11,32 +11,23 @@ body
     height: 60px;
     background-color:  rgba(255, 255, 255, 0.493);
 }
-#Admin_choices_table tr,td
+
+#Register_User_table tr,td
 {
     /* border: solid black 2px; */
-    padding: 15px;
+    padding: 20px;
 }
 
-#Admin_choices_table
-{   
-    background-color: rgba(240, 248, 255, 0.3);
+#Register_User_table
+{
+    background-color: rgba(255, 255, 255, 0.364);
+    margin-top: 12%;
+    margin-left: 42%;
     border: dotted black 5px; 
     border-radius: 30px;
 }
 
-.Admin_Choices_btns
-{
-    height: 70px;
-    width: 250px;
-}
-
-#Admin_Choices_Box
-{
-    margin-left: 42%;
-    margin-top: 3%;
-}
-
-#back_btn
+#back_button
 {
     margin-top: 1%;
     margin-left: 0px;

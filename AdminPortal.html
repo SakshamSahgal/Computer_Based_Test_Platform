@@ -3,12 +3,18 @@
     <title>Admin Portal</title>
 </head>
 <body>
-    <div>
-        <button id="back_btn">Back</button>
-        <button id="register_User_btn"> Register User </button>
-        <Button id="Delete_User_btn"> Delete User </Button>
-        <button id="Update_User_btn"> Update User </button>
-        <button id="View_User_btn"> View All users </button>
+    <link rel="stylesheet" href="CSS/AdminPortal.css">
+    <div id="Top_Bar"> <h2 style="text-align:center ; padding-top: 15px;"> ADMIN PORTAL </h2></div>
+    <button id="back_btn">Go Back</button>
+    <div id="Admin_Choices_Box">
+        <table id="Admin_choices_table">
+            <tr><td><img src="GUI_Resources/AdminUI.png"></td></tr>
+            <tr><td style="text-align: center;"><button id="register_User_btn" class="Admin_Choices_btns"> <b>Register User</b> </button></td></tr>
+            <tr><td style="text-align: center;"><Button id="Delete_User_btn" class="Admin_Choices_btns"> <b> Delete User </b> </Button></td></tr>
+            <tr><td style="text-align: center;"><button id="Update_User_btn" class="Admin_Choices_btns"> <b>Update User </b> </button></td></tr>
+            <tr><td style="text-align: center;"><button id="View_User_btn" class="Admin_Choices_btns">  <b>View All users </b> </button></td></tr>
+        </table>
+        
     </div>
     <script>
         //-----------------------------Refrences-----------------------------------//
@@ -16,7 +22,7 @@
         var back_btn = document.getElementById("back_btn");
         function redirect_to_register_user_page()
         {
-            location.href = "registerUser.html";
+            location.href = "RegisterUser.html";
         }
 
         function redirect_to_homepage()

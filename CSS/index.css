@@ -1,16 +1,15 @@
 #Login_box
 {
    position: absolute;
-   border: solid black 2px; 
-   border-style: dotted dashed solid double;
-   border-radius: 10px;
-   margin-top: 18%;
+   border: dashed black 5px; 
+   border-radius: 30px;
+   margin-top: 15%;
    margin-left: 35%;
    width: 550px;
    height: 250px; 
    padding-left: 20px;
    padding-top: 40px;
-   background-color: rgba(206, 255, 255, 0.493);
+   background-color: rgba(255, 255, 255, 0.493);
 }
 #Top_Bar
 {
@@ -21,7 +20,8 @@
 #login_table tr,td
 {
     margin: 20px;
-    /* border: solid; */
+     /* border: solid; */
+     padding: 10px;
 }
 
 body
