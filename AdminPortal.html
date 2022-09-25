@@ -4,11 +4,29 @@
 </head>
 <body>
     <div>
-        <button> Register User </button>
-        <Button> Delete User </Button>
-        <button> Update User </button>
-        <button> View All users </button>
+        <button id="back_btn">Back</button>
+        <button id="register_User_btn"> Register User </button>
+        <Button id="Delete_User_btn"> Delete User </Button>
+        <button id="Update_User_btn"> Update User </button>
+        <button id="View_User_btn"> View All users </button>
     </div>
-    
+    <script>
+        //-----------------------------Refrences-----------------------------------//
+        var register_User_btn = document.getElementById("register_User_btn");
+        var back_btn = document.getElementById("back_btn");
+        function redirect_to_register_user_page()
+        {
+            location.href = "registerUser.html";
+        }
+
+        function redirect_to_homepage()
+        {
+            location.href = "index.html";
+        }
+
+        //-------------Assignments----------------------//
+        register_User_btn.addEventListener('click',redirect_to_register_user_page);
+        back_btn.addEventListener('click',redirect_to_homepage);
+    </script>
 </body>
 </html>
