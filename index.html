@@ -16,13 +16,11 @@
     </div>
 </body>
 <!-------------------------------------imports + configuration-------------------------------->
+<!-- importing the JS cookie CDN -->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script type="module">
-    // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-  
-    // Your web app's Firebase configuration
+
     const firebaseConfig = {
       apiKey: "AIzaSyCyt3pQ5xUwzRSa1k4yPwGuJiPTjEJsNoY",
       authDomain: "cbtplatform-d2cb9.firebaseapp.com",
@@ -32,11 +30,11 @@
       appId: "1:1071199320623:web:ef64a8442f32f01d84e4da"
     };
   
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    import {getDatabase, ref, get, set, child, update,remove} 
-          from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js" ; //importing the functions 
-        const db = getDatabase(); //getting the database
+   
+    import {getDatabase, ref, get, set, child, update,remove}  from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js" ; //importing the functions 
+
+    const db = getDatabase(); //getting the database
 
     //-----------------------------Refrences-----------------------------------//
     var login_as_Admin = document.getElementById("login_as_Admin"); 
@@ -59,6 +57,9 @@
         {
             if(input_uid.value != "" && input_pass.value != "") //if input fields are not empty
             {
+                Cookies.set("Logged_in","yes"); //storing session cookies
+                Cookies.set("user_id",input_uid.value); //storing session cookies
+
                 const dbref = ref(db); //getting a refrence to the DB
                 get(child(dbref,"Admins/"+ input_uid.value)).then((snapshot)=>{
                 if(snapshot.exists() && snapshot.val().Password == input_pass.value) //if this record exists and user id and password matches
@@ -79,8 +80,7 @@
         
     }
 
-     //-------------Assignments----------------------//
+    //-------------Assignments----------------------//
      login_button.addEventListener('click',Login);
   </script>
-
 </html>

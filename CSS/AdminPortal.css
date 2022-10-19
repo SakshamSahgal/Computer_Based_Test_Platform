@@ -11,6 +11,7 @@ body
     height: 60px;
     background-color:  rgba(255, 255, 255, 0.493);
 }
+
 #Admin_choices_table tr,td
 {
     /* border: solid black 2px; */
@@ -32,8 +33,9 @@ body
 
 #Admin_Choices_Box
 {
-    margin-left: 42%;
-    margin-top: 3%;
+    position: absolute;
+    left: 43%;
+    top : 20%;
 }
 
 #back_btn
@@ -42,4 +44,23 @@ body
     margin-left: 0px;
     height: 30px;
     width: 100px;
+}
+
+#Welcome_box
+{
+    padding: 5px;
+    border: dotted black 2px;
+    background-color: rgba(235, 255, 255, 0.356);
+    border-radius: 9px;
+    width: 350px;
+    height: 70px;
+    right: 1%;
+    top: 9%;
+    position: absolute;
+    text-align: center;
+}
+
+#logout_box_table tr,td
+{
+    text-align: center;
 }
