@@ -38,16 +38,10 @@ body
     top : 20%;
 }
 
-#back_btn
-{
-    margin-top: 1%;
-    margin-left: 0px;
-    height: 30px;
-    width: 100px;
-}
-
 #Welcome_box
 {
+    text-align: center;
+    width: fit-content;
     padding: 5px;
     border: dotted black 2px;
     background-color: rgba(235, 255, 255, 0.356);
@@ -63,4 +57,5 @@ body
 #logout_box_table tr,td
 {
     text-align: center;
+    width: fit-content;
 }

@@ -3,12 +3,11 @@
    position: absolute;
    border: dashed black 5px; 
    border-radius: 30px;
-   margin-top: 15%;
-   margin-left: 35%;
+   left: 36%;
+   top: 38%;
    width: 550px;
    height: 250px; 
-   padding-left: 20px;
-   padding-top: 40px;
+   padding: 20px;
    background-color: rgba(255, 255, 255, 0.493);
 }
 #Top_Bar
@@ -29,4 +28,11 @@ body
     background-image: url("../GUI_Resources/Background5.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+
+#login_button
+{
+    height: 30px;
+    width: 100px;
 }

@@ -21,16 +21,25 @@ body
 #Register_User_table
 {
     background-color: rgba(255, 255, 255, 0.364);
-    margin-top: 12%;
-    margin-left: 42%;
+    position: absolute;
+    top: 32%;
+    left: 38%;
     border: dotted black 5px; 
     border-radius: 30px;
 }
 
-#back_button
+#Welcome_box
 {
-    margin-top: 1%;
-    margin-left: 0px;
-    height: 30px;
-    width: 100px;
+    text-align: center;
+    width: fit-content;
+    padding: 5px;
+    border: dotted black 2px;
+    background-color: rgba(235, 255, 255, 0.356);
+    border-radius: 9px;
+    width: 350px;
+    height: 70px;
+    right: 1%;
+    top: 9%;
+    position: absolute;
+    text-align: center;
 }
