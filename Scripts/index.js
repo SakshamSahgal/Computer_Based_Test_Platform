@@ -44,7 +44,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
                     Cookies.set("user_id",input_uid.value); //storing session cookies
                     Cookies.set("Name",(snapshot.val().Name)); //storing session cookies for fast retrival of username
                     console.log("Logged in");
-                    location.href = "../AdminPortal.html";
+                    location.href = "./AdminPortal.html";
                 }
                 else
                     alert("Wrong UserID/Password");
