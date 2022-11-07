@@ -57,7 +57,7 @@ function InsertData() //function inserts data to Database
 
 function redirect_to_homepage() //function locates back to Admin_Portal
 {
-    location.href = "../AdminPortal.html";
+    location.href = "../index.html";
 }
 
 function assign_Profile()

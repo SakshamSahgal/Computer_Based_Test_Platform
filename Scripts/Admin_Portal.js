@@ -9,7 +9,7 @@ function redirect_to_register_user_page()
     location.href = "../RegisterUser.html";
 }
 
-function redirect_to_homepage()
+function redirect_to_homepage() // (called when user is not logged in and tries to access via direct link)
 {
     location.href='../index.html';
 }
@@ -35,5 +35,5 @@ function logout_user()
 }
             
 //-------------Assignments----------------------//
-register_User_btn.addEventListener('click',redirect_to_register_user_page);
+register_User_btn.addEventListener('click',redirect_to_register_user_page); 
 logout_button.addEventListener('click',logout_user);
