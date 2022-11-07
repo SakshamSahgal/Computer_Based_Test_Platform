@@ -6,12 +6,12 @@ var logout_button = document.getElementById("Logout_btn");
 
 function redirect_to_register_user_page()
 {
-    location.href = "../RegisterUser.html";
+    location.href = "./RegisterUser.html";
 }
 
 function redirect_to_homepage() // (called when user is not logged in and tries to access via direct link)
 {
-    location.href='../index.html';
+    location.href='./index.html';
 }
 
 function assign_Profile()
