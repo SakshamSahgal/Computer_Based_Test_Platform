@@ -2,12 +2,12 @@ Progress -
 
 Index.html (HomePage) -
 
-if (login as == login_as_Admin && user-id and password matches with firebase database)
-    {
-        store session cookies as -> {logged_in ,yes} , {user_id,ID entered} , {Name , name from database};
-        redirect  to AdminPortal
-    }
-
+login as admin -
+    saves session cookies 
+        {logged_in ,yes} 
+        {user_id,ID entered} 
+        {Name , name from database}
+    redirects to Admin portal
 
 AdminPortal.html
 
