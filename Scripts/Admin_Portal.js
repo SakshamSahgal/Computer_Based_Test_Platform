@@ -1,7 +1,7 @@
 //-----------------------------Refrences-----------------------------------//
 var register_User_btn = document.getElementById("register_User_btn");
 var logout_button = document.getElementById("Logout_btn");
-
+var view_All_User_btn = document.getElementById("View_User_btn");
 //functions
 
 function redirect_to_register_user_page()
@@ -12,6 +12,11 @@ function redirect_to_register_user_page()
 function redirect_to_homepage() // (called when user is not logged in and tries to access via direct link)
 {
     location.href='./index.html';
+}
+
+function redirect_to_view_users()
+{
+    location.href = './View_All_Users.html';
 }
 
 function assign_Profile()
@@ -37,3 +42,4 @@ function logout_user()
 //-------------Assignments----------------------//
 register_User_btn.addEventListener('click',redirect_to_register_user_page); 
 logout_button.addEventListener('click',logout_user);
+view_All_User_btn.addEventListener('click',redirect_to_view_users);

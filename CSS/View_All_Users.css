@@ -1,0 +1,32 @@
+.Student_table tr,.Student_table td,.Student_table th
+{
+    width: 300px;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.3);
+    border-radius: 30px;
+}
+
+.Problem_Setter_table tr,.Problem_Setter_table td,.Problem_Setter_table th
+{
+    width: 300px;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.3);
+    border-radius: 30px;
+}
+
+
+#table_divs
+{
+    width: 1000px;
+    position: absolute;
+    text-align: center;
+    right: 25%;
+    top: 25%;
+    /* border: dotted black 2px; */
+}

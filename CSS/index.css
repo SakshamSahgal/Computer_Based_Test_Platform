@@ -10,26 +10,13 @@
    padding: 20px;
    background-color: rgba(255, 255, 255, 0.493);
 }
-#Top_Bar
-{
-    width: 100%;
-    height: 60px;
-    background-color:  rgba(255, 255, 255, 0.493);
-}
-#login_table tr,td
+
+#login_table tr,#login_table td
 {
     margin: 20px;
      /* border: solid; */
      padding: 10px;
 }
-
-body
-{
-    background-image: url("../GUI_Resources/Background5.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 
 #login_button
 {

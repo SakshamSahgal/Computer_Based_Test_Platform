@@ -1,9 +1,4 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCyt3pQ5xUwzRSa1k4yPwGuJiPTjEJsNoY",
   authDomain: "cbtplatform-d2cb9.firebaseapp.com",
@@ -12,7 +7,6 @@ const firebaseConfig = {
   messagingSenderId: "1071199320623",
   appId: "1:1071199320623:web:ef64a8442f32f01d84e4da"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 import {getDatabase, ref, get, set, child, update,remove} 
@@ -60,7 +54,7 @@ function redirect_to_homepage() //function locates back to Admin_Portal
     location.href = "./index.html";
 }
 
-function assign_Profile()
+function assign_Profile() //this function assigns the profile div it's data for username
 {
     document.getElementById("logged_in_as").innerHTML = Cookies.get("Name"); //assigning values
 }
