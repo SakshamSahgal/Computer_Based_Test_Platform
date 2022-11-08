@@ -30,11 +30,17 @@ function add_to_table(id,name,pass,uid) //function inserts data into table
     var table = document.getElementById(id);
     var row = table.insertRow(2); //inserting at the first index (since index 0 is heading)
     var name_cell = row.insertCell(0); //inserting at the 0th col (starting)
-    var pass_cell = row.insertCell(1); //inserting at the 0th col (starting)
-    var uid_cell = row.insertCell(2); //inserting at the 0th col (starting)
+    var pass_cell = row.insertCell(1); //inserting at the 1th col 
+    var uid_cell = row.insertCell(2); //inserting at the 2th col 
+    var edit_cell = row.insertCell(3);  //inserting at the 3th col 
+    var delete_cell = row.insertCell(4);  //inserting at the 4th col 
     name_cell.innerHTML = name;
     pass_cell.innerHTML = pass;
     uid_cell.innerHTML = uid;
+    edit_cell.innerHTML = "<Button style = 'background-color: transparent;' > <img src = './GUI_Resources/Edit_Icon.png'> </Button>";
+    edit_cell.style = "width: 80px;";
+    delete_cell.innerHTML = "<Button style = 'background-color: transparent;'> <img src = './GUI_Resources/Delete_Icon.png'> </Button>";
+    delete_cell.style = "width: 80px;";
 }
 
 

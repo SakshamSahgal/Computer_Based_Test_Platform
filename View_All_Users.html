@@ -12,17 +12,31 @@
         </table>
     </div>
     <div id="table_divs"> 
-        <table class="Student_table" id="Student_table"> 
-           <tr><th colspan="3">Students</th></tr> 
-            <th>Student name</th> <th> Password </th> <th> User_ID </th>
+        <table class="Student_table" id="Student_table">
+           <tr><th colspan="5">Students</th></tr>
+            <tr> <th>Student name</th> <th> Password </th> <th> User_ID </th> <th style="width: 80px;"> Edit </th> <th style="width: 80px;" > Delete </th> </tr>
         </table>
         &nbsp;
         <table class="Problem_Setter_table" id="Problem_Setter_table"> 
-            <tr><th colspan="3">Problem Setters</th></tr>
-            <tr><th>Problem Setter name</th> <th> Password </th> <th> User_ID </th></tr>
+            <tr><th colspan="5">Problem Setters</th></tr>
+            <tr><th>Problem Setter name</th> <th> Password </th> <th> User_ID </th> <th style="width: 80px;"> Edit </th> <th style="width: 80px;" > Delete </th> </tr>
             </table>
         </table>
     </div>
+
+        <div id="Current_edit_div">
+        
+        <table id="Current_Edit_table">
+            <tr><th style="text-align: center;" colspan="2">Current Edit</th></tr>
+            <tr><td style="text-align: center;"> <b>User_Type :</b> </td> <td> <input type="radio" name="input_as" id="input_as_Student" checked> Student <input type="radio" name="input_as" id="input_as_Problem_Setter"> Problem_Setter</td></tr>
+            <tr><td><b>Name</b></td><td><input type="text"></td></tr>
+            <tr><td> <b>Password</b></td><td><input type="text"></td></tr>
+            <tr><td><b>User_ID</b></td><td><input type="text"></td></tr>
+            <tr><td style="text-align: center;"  colspan="2"><button>Update</button></td></tr>
+        </table>
+
+    </div>
+
     <!-- importing js cookie CDN library -->
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> 
     
