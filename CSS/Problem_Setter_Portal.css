@@ -1,0 +1,28 @@
+#Add_Question_Pallet_Container
+{
+    /* border: solid black 2px; */
+    width: 700px;
+    position: absolute;
+    left: 35%;  
+    top: 20%;
+}
+
+
+#Add_Question_pallet td
+{
+    /* border: solid black 3px;   */
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#Add_Photo_Container_Div
+{
+    z-index: 2;
+    position: relative;
+    left: 45%;
+    top:40%;
+}
+
+#Add_Question_pallet th
+{
+    background-color: rgba(84, 238, 255, 0.3);
+}
