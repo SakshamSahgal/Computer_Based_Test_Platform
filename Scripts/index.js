@@ -36,18 +36,18 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
         {
             if(input_uid.value != "" && input_pass.value != "") //if input fields are not empty
             {
-                const dbref = ref(db); //getting a refrence to the DB
-                get(child(dbref,"Admins/" + input_uid.value)).then((snapshot)=>{
-                if(snapshot.exists() && snapshot.val().Password == input_pass.value) //if this record exists and user id and password matches
-                {
-                    Cookies.set("Logged_in","yes"); //storing session cookies
-                    Cookies.set("user_id",input_uid.value); //storing session cookies
-                    Cookies.set("Name",(snapshot.val().Name)); //storing session cookies for fast retrival of username
-                    console.log("Logged in");
-                    location.href = "./AdminPortal.html";
-                }
-                else
-                    alert("Wrong UserID/Password");
+                get(ref(db,"Admins/" + input_uid.value))
+                .then((snapshot)=>{
+                    if(snapshot.exists() && snapshot.val().Password == input_pass.value) //if this record exists and user id and password matches
+                    {
+                        Cookies.set("Logged_in","yes"); //storing session cookies
+                        Cookies.set("user_id",input_uid.value); //storing session cookies
+                        Cookies.set("Name",(snapshot.val().Name)); //storing session cookies for fast retrival of username
+                        console.log("Logged in");
+                        location.href = "./AdminPortal.html";
+                    }
+                    else
+                        alert("Wrong UserID/Password");
                 })
                 .catch((error)=>{
                     alert("unsuccessful, error = " + error);

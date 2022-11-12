@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------Firebase setup-------------------------------------------------------------------------------
 
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
 
     const firebaseConfig = {
@@ -17,14 +16,16 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
    import {getDatabase, ref, get, set, child, update,remove}  from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js" ; //importing the functions 
 
     const db = getDatabase(); //getting the database
+
 //-------------------------------------------------------------------------------Refrences-------------------------------------------------------------------
 
 var logout_button = document.getElementById("Logout_btn");
 var current_edit_name = document.getElementById("current_edit_name");
 var current_edit_password = document.getElementById("current_edit_password");
-var current_edit_user_id = document.getElementById("current_edit_user_id");
 var user_type_checkbox_student = document.getElementById("input_as_Student");
 var user_type_checkbox_Problem_Setter = document.getElementById("input_as_Problem_Setter");
+var update_btn = document.getElementById("Update_btn");
+
 //-------------------------------------------------------------------------------Functions-------------------------------------------------------------------
 
 function refresh_page()
@@ -32,7 +33,7 @@ function refresh_page()
     location.href = "./View_All_Users.html";   
 }
 
-function edit_data(obj)
+function edit_data(obj) //this function puts the data from the table to current edit input fields
 {
     if(obj.sub_database == "Students")
         user_type_checkbox_student.checked = true;
@@ -41,13 +42,14 @@ function edit_data(obj)
         
     current_edit_name.value = obj.name_val;
     current_edit_password.value = obj.password;
-    current_edit_user_id.value = obj.User_ID;
     console.log(obj);
+    update_btn.addEventListener('click',update_Data.bind(null,obj));
 }
 
-function delete_data(obj)
+function delete_data(obj) //this function is called when a delete button is clicked (it deletes the entry from database and refreshes the page)
 {
-    remove(ref(db,obj.sub_database + "/" + obj.User_ID)).then(()=>{
+    remove(ref(db,obj.sub_database + "/" + obj.User_ID))
+    .then(()=>{
         refresh_page();
     })
     .catch((error)=>{
@@ -55,6 +57,20 @@ function delete_data(obj)
     });
 }
 
+function update_Data(obj)
+{
+    update(ref(db,obj.sub_database + "/" + obj.User_ID),{
+        Name : current_edit_name.value,
+        Password : current_edit_password.value ,
+        User_ID : obj.User_ID
+    })
+    .then(()=>{
+        refresh_page();
+    })
+    .catch((error)=>{
+        alert("unsuccessful while  updating , error = " + error);
+    })
+}
 
 function add_to_table(id,name,pass,uid) //function inserts data into table
 {
