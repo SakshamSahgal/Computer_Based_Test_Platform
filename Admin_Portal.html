@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>View all users</title>
+    <title>Admin Portal</title>
 </head>
 <link rel="stylesheet" href="CSS/Admin_Portal.css">
 <link rel="stylesheet" href="CSS/CommonCSS.css">
@@ -27,7 +27,7 @@
     <div id="Current_edit_div">
         
             <table id="Current_Edit_table">
-                <tr><td style="text-align: center;" colspan="2"> <b> CURRENT EDIT </b></td></tr>
+                <tr> <td style="text-align: center;"> <img src="GUI_Resources/Edit_Icon.png" alt="" width="40px"> </td> <td style="text-align: left;" colspan="2"> <b> CURRENT EDIT </b></td></tr>
                 <tr><td style="text-align: center;"> <b>User_Type :</b> </td> <td> <input disabled type="radio" name="input_as" id="input_as_Student" value="Students"> Student <input disabled type="radio" name="input_as" id="input_as_Problem_Setter" value="Problem_Setters"> Problem_Setter</td></tr>
                 <tr><td><b>Name</b></td><td><input type="text" id="current_edit_name"></td></tr>
                 <tr><td> <b>Password</b></td><td><input type="text" id="current_edit_password"></td></tr>
@@ -36,19 +36,22 @@
 
     </div>
 
+    <div id="Admin_Banner_div">
+        <img src="GUI_Resources/AdminUI.png" alt="" width="150px">
+    </div>
+
     <table id="Register_User_table">
-        <tr><td style="text-align: center;"> <b>REGISTER USER</b></td></tr>
-        <tr><td style="text-align: center;"> <b>User_Type :</b> <input type="radio" name="input_as" id="register_as_Student" checked> Student <input type="radio" name="input_as" id="register_as_Problem_Setter"> Problem_Setter</td></tr>
-        <tr><td style="text-align: center;"> User ID : <input type="number" id="input_user_id"></td></tr>
-        <tr><td style="text-align: center;">Name : <input type="text" id="input_name"></td></tr>
-        <tr><td style="text-align: center;">Password : <input type="password" id="input_password"></td></tr>
-        <tr><td style="text-align: center;"><button id="Register_btn"> Register </button></td></tr>
+        <tr><td style="text-align: center;" width="20px"><img src="GUI_Resources/plus.png" alt="" width="40px"></td><td style="text-align: left;"> <b>REGISTER USER</b></td></tr>
+        <tr><td colspan="2" style="text-align: center;"> <b>User_Type :</b> <input type="radio" name="input_as" id="register_as_Student" checked> Student <input type="radio" name="input_as" id="register_as_Problem_Setter"> Problem_Setter</td></tr>
+        <tr><td colspan="2"style="text-align: center;"> User ID : <input type="number" id="input_user_id"></td></tr>
+        <tr><td colspan="2" style="text-align: center;">Name : <input type="text" id="input_name"></td></tr>
+        <tr><td colspan="2" style="text-align: center;">Password : <input type="password" id="input_password"></td></tr>
+        <tr><td colspan="2" style="text-align: center;"><button id="Register_btn"> Register </button></td></tr>
     </table>
 
 
     <!-- importing js cookie CDN library -->
-    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script> 
-    
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>  
     <script type="module" src="Scripts/Admin_Portal.js"></script>
 </body>
 </html>

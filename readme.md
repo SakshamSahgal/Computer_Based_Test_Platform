@@ -12,29 +12,15 @@ login as admin -
 
 AdminPortal.html
 
+    Can perform all Crud Operations on Database Through Admin Portal
+
     Register user
-        1. Redirects to RegisterUser.html
+        Can Register users as Student/Problem_Setter
 
     Logout button
         1. Clears Session Cookies
         2. Redirects To HomePage
 
-    View All users
-        1. Redirects to View_All_users.html
+    Current Edit 
+        1. Can edit data of currently selected Row
 
-
-RegisterUser.html
-
-        Can Register users as Student/Problem_Setter
-
-        logout Button
-            1. Clears Session Cookies
-            2. Redirects To HomePage
-
-View_All_Users.html
-
-        logout Button
-            1. Clears Session Cookies
-            2. Redirects To HomePage
-
-        View the entire Student / Problem Setter Database
