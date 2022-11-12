@@ -19,11 +19,42 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
     const db = getDatabase(); //getting the database
 //-------------------------------------------------------------------------------Refrences-------------------------------------------------------------------
 
-var student_table = document.getElementById("Student_table");
-var Problem_Setter_table = document.getElementById("Problem_Setter_table");
 var logout_button = document.getElementById("Logout_btn");
-
+var current_edit_name = document.getElementById("current_edit_name");
+var current_edit_password = document.getElementById("current_edit_password");
+var current_edit_user_id = document.getElementById("current_edit_user_id");
+var user_type_checkbox_student = document.getElementById("input_as_Student");
+var user_type_checkbox_Problem_Setter = document.getElementById("input_as_Problem_Setter");
 //-------------------------------------------------------------------------------Functions-------------------------------------------------------------------
+
+function refresh_page()
+{
+    location.href = "./View_All_Users.html";   
+}
+
+function edit_data(obj)
+{
+    if(obj.sub_database == "Students")
+        user_type_checkbox_student.checked = true;
+    else if(obj.sub_database == "Problem_Setters")
+        user_type_checkbox_Problem_Setter.checked = true;
+        
+    current_edit_name.value = obj.name_val;
+    current_edit_password.value = obj.password;
+    current_edit_user_id.value = obj.User_ID;
+    console.log(obj);
+}
+
+function delete_data(obj)
+{
+    remove(ref(db,obj.sub_database + "/" + obj.User_ID)).then(()=>{
+        refresh_page();
+    })
+    .catch((error)=>{
+        alert("unsuccessful , error " + error);
+    });
+}
+
 
 function add_to_table(id,name,pass,uid) //function inserts data into table
 {
@@ -34,13 +65,31 @@ function add_to_table(id,name,pass,uid) //function inserts data into table
     var uid_cell = row.insertCell(2); //inserting at the 2th col 
     var edit_cell = row.insertCell(3);  //inserting at the 3th col 
     var delete_cell = row.insertCell(4);  //inserting at the 4th col 
-    name_cell.innerHTML = name;
-    pass_cell.innerHTML = pass;
-    uid_cell.innerHTML = uid;
-    edit_cell.innerHTML = "<Button style = 'background-color: transparent;' > <img src = './GUI_Resources/Edit_Icon.png'> </Button>";
-    edit_cell.style = "width: 80px;";
-    delete_cell.innerHTML = "<Button style = 'background-color: transparent;'> <img src = './GUI_Resources/Delete_Icon.png'> </Button>";
+    name_cell.innerHTML = name; //setting data to the cell
+    pass_cell.innerHTML = pass; //setting data to the password cell
+    uid_cell.innerHTML = uid; //setting data to the user id cell
+
+    var edit_btn_id = "edit," + id + "," + uid; //id for each edit button (using this format to make all id distinct)
+    var delete_btn_id = "del," + id + "," + uid; //id for each delete button (using this format to make all id distinct)
+
+    edit_cell.innerHTML = "<Button style = 'background-color: transparent;' id = " + edit_btn_id + " > <img src = './GUI_Resources/Edit_Icon.png'> </Button>";
+    edit_cell.style = "width: 80px;";  
+    delete_cell.innerHTML = "<Button style = 'background-color: transparent; ' id = " + delete_btn_id + " > <img src = './GUI_Resources/Delete_Icon.png'> </Button>";
     delete_cell.style = "width: 80px;";
+
+    const row_object = {
+        sub_database : (id == "Student_table") ? "Students" : "Problem_Setters" , //getting subdatabse from table id
+        name_val : name,
+        password : pass,
+        User_ID : uid 
+    }
+
+    var th_edit_btn = document.getElementById(edit_btn_id);
+    th_edit_btn.addEventListener('click',edit_data.bind(null,row_object));
+
+    var th_delete_btn = document.getElementById(delete_btn_id);
+    th_delete_btn.addEventListener('click',delete_data.bind(null,row_object));
+
 }
 
 
@@ -48,16 +97,19 @@ function Fetch_data_from_database(to_database,table_id) //function that fetches 
 {
    const dbref = ref(db);
    get(child(dbref,to_database)).then((snapshot)=>{
-
-    var obj = (snapshot.val()); //getting the object
-    console.log(obj);
-    var values = Object.values(obj); //getting the value array of the object (each item in the array is itself an object)
-    console.log(values);
-    for(var i=0;i<values.length;i++)
-        add_to_table(table_id,values[i].Name,values[i].Password,values[i].User_ID);
-    
+    if(snapshot.exists())
+    {
+        var obj = (snapshot.val()); //getting the object
+        console.log(obj);
+        var values = Object.values(obj); //getting the value array of the object (each item in the array is itself an object)
+        console.log(values);
+        for(var i=0;i<values.length;i++)
+            add_to_table(table_id,values[i].Name,values[i].Password,values[i].User_ID);
+    }
    });
 }
+
+
 
 function logout_user()
 {
