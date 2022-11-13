@@ -110,13 +110,18 @@ function update_Data(obj)
         User_ID : obj.User_ID
     }
 
-    update(ref(db,database_loc),updated_obj) //updating in database
-    .then(()=>{
-        refresh_page();
-    })
-    .catch((error)=>{
-        alert("unsuccessful while  updating , error = " + error);
-    })
+    if(updated_obj.Name == "" || updated_obj.Password == "" )
+        alert("You can't leave entries blank");
+    else
+    {
+        update(ref(db,database_loc),updated_obj) //updating in database
+        .then(()=>{
+            refresh_page();
+        })
+        .catch((error)=>{
+            alert("unsuccessful while  updating , error = " + error);
+        })
+    }
 }
 
 function add_to_table(id,name,pass,uid) //function inserts data into table
@@ -173,6 +178,10 @@ function Fetch_data_from_database(to_database,table_id) //function that fetches 
 }
 
 
+function redirect_to_homepage() //function locates back to Admin_Portal
+{
+    location.href = "./index.html";
+}
 
 function logout_user()
 {
@@ -182,10 +191,6 @@ function logout_user()
     redirect_to_homepage();
 }
 
-function redirect_to_homepage() //function locates back to Admin_Portal
-{
-    location.href = "./index.html";
-}
 
 function assign_Profile() //this function assigns the profile div it's data for username
 {
