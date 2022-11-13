@@ -2,13 +2,21 @@ Progress -
 
 Index.html (HomePage) -
 
-login as admin -
+    login as admin -
 
-        1. saves session cookies
+            1. saves session cookies
             {logged_in ,yes}
             {user_id,ID entered}
             {Name , name from database}
-        2. redirects to Admin portal
+            2. redirects to Admin portal
+
+    login as Problem Setter
+
+             1. saves session cookies
+            {logged_in ,yes}
+            {user_id,ID entered}
+            {Name , name from database}
+            2. redirects to Problem Setter portal
 
 AdminPortal.html
 
@@ -23,4 +31,9 @@ AdminPortal.html
 
     Current Edit 
         1. Can edit data of currently selected Row
+
+Problem_Setter_Portal.html
+
+    1. generates a Universally unique id (by using Date.now() timestamp)
+    2. Can submit Questions to QuestionBank with this Unique ID
 
