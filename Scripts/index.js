@@ -60,7 +60,30 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
             else
                 alert("Please Enter Values");
         }
-        
+        else if(login_as_Problem_Setter.checked)
+        {
+            if(input_uid.value != "" && input_pass.value != "") //if input fields are not empty
+            {
+                get(ref(db,"Problem_Setters/" + input_uid.value))
+                .then((snapshot)=>{
+                    if(snapshot.exists() && snapshot.val().Password == input_pass.value) //if this record exists and user id and password matches
+                    {
+                        Cookies.set("Logged_in","yes"); //storing session cookies
+                        Cookies.set("user_id",input_uid.value); //storing session cookies
+                        Cookies.set("Name",(snapshot.val().Name)); //storing session cookies for fast retrival of username
+                        console.log("Logged in");
+                        location.href = "./Problem_Setter_Portal.html";
+                    }
+                    else
+                        alert("Wrong UserID/Password");
+                })
+                .catch((error)=>{
+                    alert("unsuccessful, error = " + error);
+                });
+            }
+            else
+                alert("Please Enter Values");
+        }
     }
 
     //----------------------------------------------------------------------Assignments------------------------------------------------------------//

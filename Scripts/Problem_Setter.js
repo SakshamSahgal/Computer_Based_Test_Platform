@@ -59,7 +59,7 @@ function Submit_Question()
     var to_database = "Question_Bank/MCQs/"; 
     var Question_ID = Date.now();
     
-    zif(Question_desc.value != "" && Mcq_opt_1.value != "" && Mcq_opt_2.value != "" && Mcq_opt_3.value != "" && Mcq_opt_4.value != "")
+    if(Question_desc.value != "" && Mcq_opt_1.value != "" && Mcq_opt_2.value != "" && Mcq_opt_3.value != "" && Mcq_opt_4.value != "")
     {
         var path_directory = to_database + Question_ID;
 
@@ -90,8 +90,6 @@ else
 {
     assign_Profile();
 }
-
-
 
 logout_button.addEventListener('click',logout_user);
 Submit_Question_btn.addEventListener('click',Submit_Question);
