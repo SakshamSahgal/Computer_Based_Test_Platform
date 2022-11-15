@@ -37,7 +37,7 @@
     border-color: aqua;
 }
 
-#Authored_By_row
+#Authored_By_row,#Difficulty_scale_row
 {
    height: 50px;
    background-color: rgba(238, 111, 79, 0.363);

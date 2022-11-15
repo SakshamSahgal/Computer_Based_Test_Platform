@@ -26,8 +26,7 @@ var Mcq_opt_3 = document.getElementById("mcq_option3_value");
 var Mcq_opt_4 = document.getElementById("mcq_option4_value");
 var Submit_Question_btn = document.getElementById("Submit_Question");
 var Authored_by_me = document.getElementById("Authored_by_me");
-var Authored_by_Anonymous = document.getElementById("Authored_by_anonymous");
-
+var Difficulty_slider = document.getElementById("Difficulty_Slider");
 //------------------------------------------------------------------------------- Functions -------------------------------------------------------------------
 
 
@@ -54,13 +53,17 @@ function assign_Profile() //this function assigns the profile div it's data for 
 function Submit_Question()
 {
     var authored_by = (Authored_by_me.checked == true) ? Cookies.get("Name") : "Anonymous";
+    
+    console.group("Question_Submission_Log");
     console.log(authored_by);
+    console.log(Difficulty_slider.value);
     console.log(Question_desc.value);
     console.log(Mcq_opt_1.value);
     console.log(Mcq_opt_2.value);
     console.log(Mcq_opt_3.value);
     console.log(Mcq_opt_4.value);
     console.log("unique id = " + Date.now());
+    console.groupEnd("Question_Submission_Log");
     
     var to_database = "Question_Bank/MCQs/"; 
     var Question_ID = Date.now();
@@ -70,17 +73,19 @@ function Submit_Question()
         var path_directory = to_database + Question_ID;
 
         var Question = {
+            Question_ID : Question_ID,
             Authored_by : authored_by,
+            Difficulty : Difficulty_slider.value,
             Description : Question_desc.value,
             Option1 : Mcq_opt_1.value ,
             Option2 : Mcq_opt_2.value ,
             Option3 : Mcq_opt_3.value ,
             Option4 : Mcq_opt_4.value 
         }
-
         set(ref( db , path_directory ), Question )
         .then(()=>{
             alert("data stored successfully");
+            location.href = "./Problem_Setter_Portal.html";
         })
         .catch((error)=>{
             alert("unsuccessful, error = " + error);
@@ -91,6 +96,11 @@ function Submit_Question()
 
 }
 
+Difficulty_slider.oninput = function() //function called when slider value changes
+{
+    document.getElementById("current_difficulty").innerHTML = Difficulty_slider.value;
+}
+
 if(Cookies.get("Logged_in") == undefined) //if got to this page without logging in redirect to homepage
     redirect_to_homepage();
 else
@@ -98,5 +108,10 @@ else
     assign_Profile();
 }
 
+
+
+
+
 logout_button.addEventListener('click',logout_user);
 Submit_Question_btn.addEventListener('click',Submit_Question);
+
