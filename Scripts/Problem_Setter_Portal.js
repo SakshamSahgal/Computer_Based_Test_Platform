@@ -20,12 +20,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
 //------------------------------------------------------------------------------- Refrences -------------------------------------------------------------------
 var logout_button = document.getElementById("Logout_btn");
 var Add_Question_btn = document.getElementById("Add_Question");
+var Question_Bank_btn = document.getElementById("Question_bank_btn");
 //------------------------------------------------------------------------------- Functions -------------------------------------------------------------------
 
-Add_Question_btn.click = function()
-{
-    
-}
 
 function redirect_to_homepage() //function locates back to Admin_Portal
 {
@@ -50,6 +47,11 @@ function redirect_to_Add_question()
     location.href = "./Add_Question.html";
 }
 
+function redirect_to_Question_Bank()
+{
+    location.href = "./Question_Bank.html";
+}
+
 if(Cookies.get("Logged_in") == undefined) //if got to this page without logging in redirect to homepage
     redirect_to_homepage();
 else
@@ -60,3 +62,4 @@ else
 
 logout_button.addEventListener('click',logout_user);
 Add_Question_btn.addEventListener('click',redirect_to_Add_question);
+Question_Bank_btn.addEventListener('click',redirect_to_Question_Bank);
