@@ -14,14 +14,15 @@
 
     <div id="Add_Question_Pallet_Container">
             <table id="Add_Question_pallet">
-                <thead><th colspan="2" style="text-align: center;"> <img src="GUI_Resources/Question_icon.png" alt=""> </th></thead>
-                <tr><td colspan="2" style="text-align: center;">Question Description</td></tr>
-                <tr><td colspan="2"><textarea name="" id="ques_desc" cols="74" rows="10"  style="resize: none;"></textarea></td></tr>
-                <tr><td>Option 1</td> <td style="text-align: center;" ><textarea style="resize: none;" name="" id="mcq_option1_value" cols="60" rows="3"></textarea></td></tr>
-                <tr><td>Option 2</td> <td style="text-align: center;" ><textarea style="resize: none;" name="" id="mcq_option2_value" cols="60" rows="3"></textarea></td></tr>
-                <tr><td>Option 3</td> <td style="text-align: center;" ><textarea style="resize: none;" name="" id="mcq_option3_value" cols="60" rows="3"></textarea></td></tr>
-                <tr><td>Option 4</td> <td style="text-align: center;" ><textarea style="resize: none;" name="" id="mcq_option4_value" cols="60" rows="3"></textarea></td></tr>
-                <tr><td colspan="2" style="text-align: center;"><button id="Submit_Question">Submit Question</button></td></tr>
+                <thead><th colspan="3" style="text-align: center;"> <img src="GUI_Resources/Question_icon.png" alt=""> </th></thead>
+                <tr id="Authored_By_row"><td> Authored By - </td> <td> <input type="radio" name="authored_by" id="Authored_by_me" checked> <span id="my_name"></span> </td><td><input type="radio" name="authored_by" id="Authored_by_anonymous"> Anonymous </td></tr>
+                <tr><td colspan="3">Question Description</td></tr>
+                <tr><td colspan="3"><textarea name="" id="ques_desc" cols="84" rows="10"  style="resize: none;"></textarea></td></tr>
+                <tr><td> Option 1</td> <td colspan="3"> <textarea style="resize: none;" name="" id="mcq_option1_value" cols="60" rows="3"></textarea></td></tr>
+                <tr><td> Option 2</td> <td colspan="3"> <textarea style="resize: none;" name="" id="mcq_option2_value" cols="60" rows="3"></textarea></td></tr>
+                <tr><td> Option 3</td> <td colspan="3"> <textarea style="resize: none;" name="" id="mcq_option3_value" cols="60" rows="3"></textarea></td></tr>
+                <tr><td> Option 4</td> <td colspan="3"> <textarea style="resize: none;" name="" id="mcq_option4_value" cols="60" rows="3"></textarea></td></tr>
+                <tr><td colspan="3" style="text-align: center;"><button id="Submit_Question">Submit Question</button></td></tr>
             </table>       
     </div>
         <!-- importing js cookie CDN library -->

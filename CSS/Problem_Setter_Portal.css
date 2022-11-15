@@ -1,7 +1,7 @@
 #Add_Question_Pallet_Container
 {
     /* border: solid black 2px; */
-    width: 700px;
+    width: 800px;
     position: absolute;
     left: 35%;  
     top: 20%;
@@ -10,7 +10,8 @@
 
 #Add_Question_pallet td
 {
-    /* border: solid black 3px;   */
+    /* border: solid black 3px;    */
+    text-align: center;
     background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -35,3 +36,10 @@
     border-radius: 15px;
     border-color: aqua;
 }
+
+#Authored_By_row
+{
+   height: 50px;
+   background-color: rgba(238, 111, 79, 0.363);
+}
+

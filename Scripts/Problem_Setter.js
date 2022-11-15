@@ -25,6 +25,9 @@ var Mcq_opt_2 = document.getElementById("mcq_option2_value");
 var Mcq_opt_3 = document.getElementById("mcq_option3_value");
 var Mcq_opt_4 = document.getElementById("mcq_option4_value");
 var Submit_Question_btn = document.getElementById("Submit_Question");
+var Authored_by_me = document.getElementById("Authored_by_me");
+var Authored_by_Anonymous = document.getElementById("Authored_by_anonymous");
+
 //------------------------------------------------------------------------------- Functions -------------------------------------------------------------------
 
 
@@ -44,11 +47,14 @@ function logout_user()
 function assign_Profile() //this function assigns the profile div it's data for username
 {
     document.getElementById("logged_in_as").innerHTML = Cookies.get("Name"); //assigning values
+    document.getElementById("my_name").innerHTML = Cookies.get("Name");
 }
 
 
 function Submit_Question()
 {
+    var authored_by = (Authored_by_me.checked == true) ? Cookies.get("Name") : "Anonymous";
+    console.log(authored_by);
     console.log(Question_desc.value);
     console.log(Mcq_opt_1.value);
     console.log(Mcq_opt_2.value);
@@ -64,6 +70,7 @@ function Submit_Question()
         var path_directory = to_database + Question_ID;
 
         var Question = {
+            Authored_by : authored_by,
             Description : Question_desc.value,
             Option1 : Mcq_opt_1.value ,
             Option2 : Mcq_opt_2.value ,
