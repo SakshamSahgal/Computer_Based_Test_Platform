@@ -1,45 +1,30 @@
-#Add_Question_Pallet_Container
-{
-    /* border: solid black 2px; */
-    width: 800px;
-    position: absolute;
-    left: 35%;  
-    top: 20%;
-}
 
-
-#Add_Question_pallet td
+#Problem_setter_pallet_table
 {
-    /* border: solid black 3px;    */
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-#Add_Photo_Container_Div
-{
-    z-index: 2;
     position: relative;
-    left: 45%;
-    top:40%;
+    top: 26%;
+    left: 7%;
 }
 
-#Add_Question_pallet th
+
+#Problem_Setter_Palette
 {
-    background-color: rgba(84, 238, 255, 0.3);
+    position: absolute;
+    top: 30%;
+    left: 42%;
+    width: 300px;
+    height: 500px;
+    border:  dotted black 4px;
+    border-radius: 30px;
+    background-color: rgba(240, 248, 255, 0.3);
 }
 
-
-#Submit_Question
+#Add_Question
 {
-    width: 250px;
-    height: 50px;
-    border-radius: 15px;
-    border-color: aqua;
+    border-radius: 20px;
 }
 
-#Authored_By_row,#Difficulty_scale_row
+#Question_bank_btn
 {
-   height: 50px;
-   background-color: rgba(238, 111, 79, 0.363);
+    border-radius: 20px;
 }
-

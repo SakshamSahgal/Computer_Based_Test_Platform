@@ -1,0 +1,52 @@
+#Add_Question_Pallet_Container
+{
+    /* border: solid black 2px; */
+    width: 782px;
+    position: absolute;
+    left: 29%;  
+    top: 15%;
+    border: dotted black 5px; 
+}
+
+
+#Add_Question_pallet td
+{
+    /* border: solid black 3px;    */
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#Add_Photo_Container_Div
+{
+    z-index: 2;
+    position: relative;
+    left: 45%;
+    top:40%;
+    
+}
+
+#Add_Question_pallet th
+{
+    background-color: rgba(84, 238, 255, 0.3);
+}
+
+
+#Submit_Question
+{
+    width: 250px;
+    height: 50px;
+    border-radius: 15px;
+    border-color: aqua;
+}
+
+#Authored_By_row
+{
+   height: 50px;
+   background-color: rgba(238, 111, 79, 0.363);
+}
+
+#Difficulty_scale_row
+{
+   height: 50px;
+   background-color: rgba(63, 42, 255, 0.363);
+}

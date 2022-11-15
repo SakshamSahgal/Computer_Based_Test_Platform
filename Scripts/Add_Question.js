@@ -85,7 +85,7 @@ function Submit_Question()
         set(ref( db , path_directory ), Question )
         .then(()=>{
             alert("data stored successfully");
-            location.href = "./Problem_Setter_Portal.html";
+            location.href = "./Add_Question.html";
         })
         .catch((error)=>{
             alert("unsuccessful, error = " + error);
