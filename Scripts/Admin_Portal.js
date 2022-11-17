@@ -127,7 +127,7 @@ function update_Data(obj)
 function add_to_table(id,name,pass,uid) //function inserts data into table
 {
     var table = document.getElementById(id);
-    var row = table.insertRow(2); //inserting at the first index (since index 0 is heading)
+    var row = table.insertRow(2); //inserting at the second index (since index 0 is table heading and 1 is coloumn heading)
     var name_cell = row.insertCell(0); //inserting at the 0th col (starting)
     var pass_cell = row.insertCell(1); //inserting at the 1th col 
     var uid_cell = row.insertCell(2); //inserting at the 2th col 

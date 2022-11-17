@@ -4,7 +4,7 @@
     width: 782px;
     position: absolute;
     left: 29%;  
-    top: 15%;
+    top: 12%;
     border: dotted black 5px; 
 }
 
@@ -49,4 +49,10 @@
 {
    height: 50px;
    background-color: rgba(63, 42, 255, 0.363);
+}
+
+#correct_ans_row
+{
+    height: 40px;
+    background-color: rgba(42, 248, 255, 0.363);
 }

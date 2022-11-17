@@ -1,0 +1,41 @@
+#MCQ_Bank_table tr /*CSS for MCQ_Bank_table table Rows */
+{
+    width: 300px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+#MCQ_Bank_table
+{
+    width: 360px;
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    border: black;
+}
+
+
+#Question_Pallet
+{
+    width: 782px;
+    position: absolute;
+    left: 47%;  
+    top: 25%;
+    border: dotted black 5px; 
+}
+
+
+#Question_pallet_table td
+{
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#Question_pallet_table th
+{
+    background-color: rgba(84, 238, 255, 0.3);
+}
+

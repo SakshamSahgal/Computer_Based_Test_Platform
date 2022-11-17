@@ -18,15 +18,19 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
     const db = getDatabase(); //getting the database
 
 //------------------------------------------------------------------------------- Refrences -------------------------------------------------------------------
-var logout_button = document.getElementById("Logout_btn");
-var Question_desc = document.getElementById("ques_desc");
-var Mcq_opt_1 = document.getElementById("mcq_option1_value");
-var Mcq_opt_2 = document.getElementById("mcq_option2_value");
-var Mcq_opt_3 = document.getElementById("mcq_option3_value");
-var Mcq_opt_4 = document.getElementById("mcq_option4_value");
-var Submit_Question_btn = document.getElementById("Submit_Question");
-var Authored_by_me = document.getElementById("Authored_by_me");
+var logout_button = document.getElementById("Logout_btn"); //getting refrence to logout button
+var Question_desc = document.getElementById("ques_desc"); //getting refrence to Question Description Text area
+var Mcq_opt_1 = document.getElementById("mcq_option1_value"); //getting refrence to Option 1 text area
+var Mcq_opt_2 = document.getElementById("mcq_option2_value"); //getting refrence to Option 2 text area
+var Mcq_opt_3 = document.getElementById("mcq_option3_value"); //getting refrence to Option 3 text area
+var Mcq_opt_4 = document.getElementById("mcq_option4_value"); //getting refrence to Option 4 text area
+var Submit_Question_btn = document.getElementById("Submit_Question"); //getting refrence to Submit Question Button
+var Authored_by_me = document.getElementById("Authored_by_me"); //getting refrence to Authored by me radio button
 var Difficulty_slider = document.getElementById("Difficulty_Slider");
+var correct_option_1 = document.getElementById("correct_opt_1");
+var correct_option_2 = document.getElementById("correct_opt_2");
+var correct_option_3 = document.getElementById("correct_opt_3");
+var correct_option = 1;
 //------------------------------------------------------------------------------- Functions -------------------------------------------------------------------
 
 
@@ -54,6 +58,16 @@ function Submit_Question()
 {
     var authored_by = (Authored_by_me.checked == true) ? Cookies.get("Name") : "Anonymous";
     
+    if(correct_option_1.checked == true)
+        correct_option = 1;
+    else if(correct_option_2.checked == true)
+        correct_option = 2;
+    else if(correct_option_3.checked == true)
+        correct_option = 3;
+    else
+        correct_option = 4;
+  
+        
     console.group("Question_Submission_Log");
     console.log(authored_by);
     console.log(Difficulty_slider.value);
@@ -62,7 +76,12 @@ function Submit_Question()
     console.log(Mcq_opt_2.value);
     console.log(Mcq_opt_3.value);
     console.log(Mcq_opt_4.value);
+    console.log(correct_option);
+
+
     console.log("unique id = " + Date.now());
+
+
     console.groupEnd("Question_Submission_Log");
     
     var to_database = "Question_Bank/MCQs/"; 
@@ -80,7 +99,8 @@ function Submit_Question()
             Option1 : Mcq_opt_1.value ,
             Option2 : Mcq_opt_2.value ,
             Option3 : Mcq_opt_3.value ,
-            Option4 : Mcq_opt_4.value 
+            Option4 : Mcq_opt_4.value ,
+            Correct_Option : correct_option
         }
         set(ref( db , path_directory ), Question )
         .then(()=>{
@@ -107,9 +127,6 @@ else
 {
     assign_Profile();
 }
-
-
-
 
 
 logout_button.addEventListener('click',logout_user);
