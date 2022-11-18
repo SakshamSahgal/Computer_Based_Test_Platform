@@ -18,7 +18,7 @@
 }
 
 
-#Question_Pallet
+#Question_Pallet_holder_div
 {
     width: 782px;
     position: absolute;
@@ -39,3 +39,10 @@
     background-color: rgba(84, 238, 255, 0.3);
 }
 
+#loading_img
+{
+    width: 100px;
+    position: absolute;
+    left: 48%;
+    top: 10%;
+}
