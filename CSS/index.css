@@ -1,4 +1,4 @@
-#Login_box
+#Login_box  /*  For login table holder div  */
 {
    position: absolute;
    border: dashed black 5px; 
@@ -11,15 +11,35 @@
    background-color: rgba(255, 255, 255, 0.493);
 }
 
-#login_table tr,#login_table td
+#login_table tr,#login_table td /*  For login table row and data cell  */
 {
     margin: 20px;
      /* border: solid; */
      padding: 10px;
 }
 
-#login_button
+#login_button /*  For login button  */
 {
     height: 30px;
     width: 100px;
+    border-radius: 10px;
+}
+
+#loading_img  /*CSS for loading image */
+{
+    position: absolute;
+    top: 43%;
+    left: 43%;
+}
+ 
+#Load_overlay /*CSS for load overlay div */
+{
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+    backdrop-filter: blur(6px);
 }

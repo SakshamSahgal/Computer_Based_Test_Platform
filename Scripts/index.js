@@ -25,6 +25,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
     var input_uid = document.getElementById("input_uid");
     var input_pass = document.getElementById("input_pass");
     var login_button = document.getElementById("login_button");
+    var load_overlay = document.getElementById("Load_overlay");
 
 //-------------------------------------------------------------------- Functions ---------------------------------------------------------------
 
@@ -40,6 +41,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
         {
             if(input_uid.value != "" && input_pass.value != "") //if input fields are not empty
             {
+                load_overlay.hidden = false;
                 get(ref(db,"Admins/" + input_uid.value))
                 .then((snapshot)=>{
                     if(snapshot.exists() && snapshot.val().Password == input_pass.value) //if this record exists and user id and password matches
@@ -48,6 +50,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
                         Cookies.set("user_id",input_uid.value); //storing session cookies
                         Cookies.set("Name",(snapshot.val().Name)); //storing session cookies for fast retrival of username
                         console.log("Logged in");
+                        load_overlay.hidden = true;
                         location.href = "./Admin_Portal.html";
                     }
                     else
@@ -64,6 +67,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
         {
             if(input_uid.value != "" && input_pass.value != "") //if input fields are not empty
             {
+                console.log("loading");
+                load_overlay.hidden = false;
                 get(ref(db,"Problem_Setters/" + input_uid.value))
                 .then((snapshot)=>{
                     if(snapshot.exists() && snapshot.val().Password == input_pass.value) //if this record exists and user id and password matches
@@ -72,6 +77,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
                         Cookies.set("user_id",input_uid.value); //storing session cookies
                         Cookies.set("Name",(snapshot.val().Name)); //storing session cookies for fast retrival of username
                         console.log("Logged in");
+                        load_overlay.hidden = true;
                         location.href = "./Problem_Setter_Portal.html";
                     }
                     else
