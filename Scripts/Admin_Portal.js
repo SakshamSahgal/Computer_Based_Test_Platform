@@ -19,7 +19,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
 
 //------------------------------------------------------------------------------- Refrences -------------------------------------------------------------------
 
-var logout_button = document.getElementById("Logout_btn");
+var logout_button = document.getElementById("Logout_btn"); //Getting refrence to Logout button
+var Load_overlay = document.getElementById("Load_overlay"); //Getting refrence to Load Overlay
+
+//--------------------------------------Refrence for Confirmation Overlay-----------------------------------------------
+var confirmation_overlay = document.getElementById("Overlay"); //getting refrence to delete Confirmation Overlay div
+var delete_confirm_yes_btn = document.getElementById("confirmation_ans_yes"); //getting refrence to delete confirmation ans yes btn
+var delete_confirm_no_btn = document.getElementById("confirmation_ans_no"); //getting refrence to delete confirmation ans no btn
 
 //--------------------------------------Refrence for Current Edit Pallet-----------------------------------------------
 
@@ -88,19 +94,28 @@ function edit_data(obj) //this function puts the data from the table to current 
     update_btn.addEventListener('click',update_Data.bind(null,obj));
 }
 
-function delete_data(obj) //this function is called when a delete button is clicked (it deletes the entry from database and refreshes the page)
+function delete_data(obj) //this function is called when a delete button is clicked (it brings up confirmation dialogue box)
 {
-    var database_loc = obj.sub_database + "/" + obj.User_ID;
-    remove(ref(db,database_loc))
-    .then(()=>{
-        refresh_page();
-    })
-    .catch((error)=>{
-        alert("unsuccessful , error " + error);
-    });
+    confirmation_overlay.hidden = false; //unhiding the confirmation overlay
+    
+    delete_confirm_no_btn.onclick = function(){
+        confirmation_overlay.hidden = true; //if no button is clicked just hide the confirmation overlay again
+    }
+
+    delete_confirm_yes_btn.onclick = function(){  //if yes button is clicked hide the overlay and delete the data from database
+        confirmation_overlay.hidden = true; 
+        var database_loc = obj.sub_database + "/" + obj.User_ID; //getting database Location to delete 
+        remove(ref(db,database_loc)) //removing from firebase database
+        .then(()=>{
+            refresh_page();
+        })
+        .catch((error)=>{
+            alert("unsuccessful , error " + error);
+        });
+    }
 }
 
-function update_Data(obj)
+function update_Data(obj) //function called when update button is clicked (this function is binded to the button only whem some edit button is clicked)
 {
     var database_loc = obj.sub_database + "/" + obj.User_ID; //getting database location to update
     
@@ -157,12 +172,12 @@ function add_to_table(id,name,pass,uid) //function inserts data into table
 
     var th_delete_btn = document.getElementById(delete_btn_id);
     th_delete_btn.addEventListener('click',delete_data.bind(null,row_object));
-
 }
 
 
 function Fetch_data_from_database(to_database,table_id) //function that fetches all the data from the database passed 
 {
+    Load_overlay.hidden = false; //unhiding the loading overlay
    const dbref = ref(db);
    get(child(dbref,to_database)).then((snapshot)=>{
     if(snapshot.exists())
@@ -171,6 +186,7 @@ function Fetch_data_from_database(to_database,table_id) //function that fetches 
         console.log(obj);
         var values = Object.values(obj); //getting the value array of the object (each item in the array is itself an object)
         console.log(values);
+        Load_overlay.hidden = true; //hiding the load overlay since data is fetched from the database
         for(var i=0;i<values.length;i++)
             add_to_table(table_id,values[i].Name,values[i].Password,values[i].User_ID);
     }
