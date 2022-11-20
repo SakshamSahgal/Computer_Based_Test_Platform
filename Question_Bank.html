@@ -21,8 +21,20 @@
         <tr><td>Question ID</td><td style="width: 20px;" >View</td></tr>
     </table>
 
+    <div id="Load_overlay" hidden>
+        <img src="GUI_Resources/Loading.gif" alt="" id="loading_img">
+    </div>
+
+    <div id="Overlay" hidden>
+        <div id="confirmation_div">
+            <table id="confirmation_table">
+                <tr><td colspan="2" id="">Do you really want to delete ?</td></tr>
+                <tr><td><button id="confirmation_ans_no">NO</button></td><td><button id="confirmation_ans_yes">YES</button></td></tr>
+            </table>
+        </div>
+    </div>
     
-    <img src="" alt="" id="loading_img">
+    
 
     <div id="Question_Pallet_holder_div" hidden>
         <table id="Question_pallet_table">
@@ -47,3 +59,4 @@
     <script type="module" src="Scripts/Question_Bank.js"></script>
 </body>
 </html>
+

@@ -21,11 +21,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
 
 var logout_button = document.getElementById("Logout_btn");
 var fetch_MCQs = document.getElementById("fetch_MCQs"); 
-
-
-
+var del_Confirm_yes_btn = document.getElementById("confirmation_ans_yes");
+var del_Confirm_no_btn = document.getElementById("confirmation_ans_no");
+var confirmation_overlay = document.getElementById("Overlay");
+var loading_overlay = document.getElementById("Load_overlay");
 //Question Pallet elements Object
-var Question_Pallet = {
+var Question_Pallet = { //JSON object for HTML elements of question pallet
     Edit_Btn : document.getElementById("Edit_Button"), 
     Edit_Btn_img : document.getElementById("Edit_btn_img"),
     Delete_Btn : document.getElementById("Delete_Button"),
@@ -116,9 +117,9 @@ function add_to_table(id,values_obj) //function inserts data into table (here va
 function Fetch_data_from_database(to_database,table_id) //function that fetches all the data from the database passed as JSON object
 {
     console.log("loading");
-    document.getElementById("loading_img").src = "GUI_Resources/Loading.gif" ;
-   const dbref = ref(db);
-   get(child(dbref,to_database)).then((snapshot)=>{
+    loading_overlay.hidden = false; //showing loading animation while fetching data from database
+    const dbref = ref(db);
+    get(child(dbref,to_database)).then((snapshot)=>{
     if(snapshot.exists())
     {
         var obj = (snapshot.val()); //getting the object
@@ -127,7 +128,8 @@ function Fetch_data_from_database(to_database,table_id) //function that fetches 
         var values = Object.values(obj); //getting the value array of the object (each item in the object is itself an object)
         console.log(values);
         console.log("loaded");
-        document.getElementById("loading_img").src = "" ;
+        loading_overlay.hidden = true; //hiding the loading overlay after the data has been fetched
+        fetch_MCQs.hidden = true; //hiding the fetch data button
         for(var i=0;i<values.length;i++)
         {
             console.log(values[i].Question_ID);
@@ -138,14 +140,12 @@ function Fetch_data_from_database(to_database,table_id) //function that fetches 
 }
 
 
-
-
 function redirect_to_homepage() //function locates back to Admin_Portal
 {
     location.href = "./index.html";
 }
 
-function logout_user()
+function logout_user() //function is called when logout button is clicked
 {
     Cookies.remove("Logged_in");
     Cookies.remove("user_id");
@@ -191,7 +191,7 @@ function edit_question() //this function is called when edit button is clicked
 }
 
 
-function Update_Data()
+function Update_Data() //this function is called when update data button is clicked
 {   
      
     var correct_opt;
@@ -241,7 +241,34 @@ Question_Pallet.Difficulty_Slider.oninput = function() //function called when sl
    Question_Pallet.current_difficulty_span.innerHTML = Question_Pallet.Difficulty_Slider.value;
 }
 
+function Delete_Data() //function called when we press yes to delete confimation
+{
+    confirmation_overlay.hidden  = true;
+    var path_directory = "Question_Bank/MCQs/" + Question_Pallet.Cur_Question_ID.innerHTML;
+    remove(ref( db , path_directory ))
+        .then(()=>{
+            alert("deleted successfully");
+            location.href = "./Question_Bank.html";
+        })
+        .catch((error)=>{
+            alert("unsuccessful , error " + error);
+        });
+}
+
+function view_confirmation() //this function enables the confirmation overlay when someone deletes a question
+{
+    confirmation_overlay.hidden = false;
+}
+
+function dont_delete() //function called when no confirmation button is pressed
+{
+    confirmation_overlay.hidden  = true;
+}
+
 logout_button.addEventListener('click',logout_user);
 fetch_MCQs.addEventListener('click',Fetch_data_from_database.bind(null,"Question_Bank/MCQs","MCQ_Bank_table"));
 Question_Pallet.Edit_Btn.addEventListener('click',edit_question);
-Question_Pallet.Update_Ques_btn.addEventListener('click',Update_Data);
+Question_Pallet.Update_Ques_btn.addEventListener('click',Update_Data); //adding click event listener to Update Question Button
+Question_Pallet.Delete_Btn.addEventListener('click',view_confirmation);
+del_Confirm_no_btn.addEventListener('click',dont_delete);
+del_Confirm_yes_btn.addEventListener('click',Delete_Data);

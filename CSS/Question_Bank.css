@@ -8,7 +8,7 @@
     background-color: rgba(240, 248, 255, 0.37);
 }
 
-#MCQ_Bank_table
+#MCQ_Bank_table /* For */
 {
     width: 360px;
     position: absolute;
@@ -24,7 +24,6 @@
     position: absolute;
     left: 47%;  
     top: 25%;
-    border: dotted black 5px; 
 }
 
 
@@ -39,10 +38,72 @@
     background-color: rgba(84, 238, 255, 0.3);
 }
 
+#Question_pallet_table
+{
+    border: dotted black 5px; 
+}
 #loading_img
 {
     width: 100px;
     position: absolute;
     left: 48%;
     top: 10%;
+}
+
+#Overlay
+{
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+  backdrop-filter: blur(6px);
+}
+
+#confirmation_div
+{
+    position: absolute;
+    top:45%;
+    left: 44%;
+    width: 12%;
+    height: 8%;
+    text-align: center;
+    background-color: azure;
+    border-radius: 25px;
+}
+
+#confirmation_table
+{
+    position: absolute;
+    top: 20%;
+    left: 8%;
+}
+
+#fetch_MCQs
+{
+    position: absolute;
+    top: 10%;
+    left: 45%;
+    width: 250px;
+    height: 50px;
+}
+
+#loading_img
+{
+    position: absolute;
+    top: 43%;
+}
+
+#Load_overlay
+{
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+    backdrop-filter: blur(6px);
 }
