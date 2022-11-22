@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Create Test</title>
+</head>
+<body>
+    <link rel="stylesheet" href="CSS/CommonCSS.css">
+    <link rel="stylesheet" href="CSS/Create_Test.css">
+    <div id="Top_Bar"> <h2 style="text-align:center ; padding-top: 15px;"> CREATE TEST </h2></div>
+    
+    <div id="Welcome_box">
+        <table id="logout_box_table">
+            <tr><td> <img src="GUI_Resources/user_ui2.png" height="40px"> </td> <td> <p id="logged_in_as"></p> </td>  <td> <button id="Logout_btn" style = " width: 80px ; height: 30px ;">Logout</button> </td>  </tr>
+        </table>
+    </div>
+
+    <div id="Load_overlay" hidden>
+        <img src="GUI_Resources/Loading.gif" alt="" id="loading_img">
+    </div>
+
+    <button id="fetch_question_bank">Fetch Question Bank</button>
+
+    <div id="Create_Test_div">
+
+        <table id="Create_Test_Table">
+            <tr> <td colspan="2" style="text-align: center;">Create Test</td> </tr>
+            <tr><td> Name of test : </td> <td> <input type="text"> </td></tr>
+            <tr> <td> Duration (minutes) : </td>  <td> <input type="number"> </td> </tr>
+            <tr><td>No of questions : </td><td><span id="no_of_questions">0</span></td></tr>
+            <tr><td>Max Marks : </td><td> <span id="max_marks">0</span> </td></tr>
+        </table>
+        
+    </div>
+
+    <div id="Question_to_add_MCQ_div">
+        <table id="Question_to_add_MCQ_table">
+            <th><td>Question ID</td><td>Add</td></th>
+        </table>
+    </div>
+     
+    <div id="Question_Added_table_div">
+        <table id="Question_Added_table">
+            <th><td colspan="2">Questions Added</td></th>
+            <th><td>Questions ID</td> <td>Marks</td></th>
+        </table>
+    </div>
+
+    
+    
+    <!-- importing js cookie CDN library -->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>  
+<script type="module" src="Scripts/Create_Test.js"></script>
+</body>
+</html>

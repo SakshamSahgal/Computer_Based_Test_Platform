@@ -1,0 +1,59 @@
+#Create_Test_Table
+{
+    background-color: rgba(240, 248, 255, 0.582);
+    border: solid black 3px; 
+}
+
+#Create_Test_div
+{
+    position: absolute;
+    top :15%;
+    left: 42%;
+}
+
+
+#Question_Added_table_div
+{
+    position: absolute;
+    top : 25%;
+    left : 80%;
+}
+
+#Question_Added_table
+{
+    background-color: rgba(240, 248, 255, 0.582);
+    border: solid black 3px; 
+}
+
+#Question_to_add_MCQ_div
+{
+    position: absolute;
+    top : 25%;
+    left : 5%;
+}
+
+#Question_to_add_MCQ_table
+{
+    background-color: rgba(240, 248, 255, 0.582);
+    border: solid black 3px; 
+}
+
+
+#loading_img  /*CSS for loading image */
+{
+    position: absolute;
+    top: 43%;
+    left: 43%;
+}
+ 
+#Load_overlay /*CSS for load overlay div */
+{
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+    backdrop-filter: blur(6px);
+}
