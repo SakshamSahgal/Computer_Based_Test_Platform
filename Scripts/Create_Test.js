@@ -23,8 +23,8 @@ var fetch_question_bank_btn = document.getElementById("fetch_question_bank"); //
 var Load_overlay = document.getElementById("Load_overlay");
 //-----------------------------------------------------------------------Global variables----------------------------------------------------------------------//
 
-var fetched_Question_Bank = {};
-
+var fetched_Question_Bank_dict = {}; //dictionary that stores the fetched question bank
+var selected_Questions_dict = {};
 
 
 //-------------------------------------------------------------------- Functions ----------------------------------------------------
@@ -56,6 +56,33 @@ if(Cookies.get("Logged_in") == undefined) //if got to this page without logging 
 else
     assign_Profile();
 
+function add_to_table(tabe_id) //function inserts data into table
+{
+    var table = document.getElementById(tabe_id);
+
+    for (const [key, value] of Object.entries(fetched_Question_Bank_dict)) 
+    {
+        console.log(key, value);
+        var row = table.insertRow(1);
+        var question_ID_Cell = row.insertCell(0);
+        var add_image_cell = row.insertCell(1);
+        question_ID_Cell.innerHTML = value.Question_ID;
+
+        var add_btn_id = "add_btn," + value.Question_ID;
+        var add_btn_img_id = "img," + value.Question_ID;
+        add_image_cell.innerHTML =  "<button class='add_question_btn' id = " + add_btn_id + "> <img src= 'GUI_Resources/add.png' id= "+ add_btn_img_id + "> </button>";
+        var add_btn = document.getElementById(add_btn_id);
+        add_btn.addEventListener('click',print_Data.bind(null,value.Question_ID));
+    }
+}
+
+function print_Data(Question_ID)
+{
+    console.log(Question_ID);
+    console.log(fetched_Question_Bank_dict[Question_ID]);
+    selected_Questions_dict[Question_ID] = fetched_Question_Bank_dict[Question_ID];
+    document.getElementById("img," + Question_ID).src =  "GUI_Resources/cancel.png";
+}
 
 function fetch_Question_Bank()
 {
@@ -74,15 +101,18 @@ function fetch_Question_Bank()
             fetch_question_bank_btn.hidden = true;
             for(var i=0;i<values.length;i++)
             {
-                console.log(values[i].Question_ID);
-                fetched_Question_Bank[values[i].Question_ID] = values[i];
+                console.log(values[i]);
+                fetched_Question_Bank_dict[String(values[i].Question_ID)] = values[i];
                 //add_to_table(table_id,values[i]);
             }
+
+            add_to_table("Question_to_add_MCQ_table");
         }
     });
 
-    console.log(fetched_Question_Bank);
 }
+
+
 
 logout_button.addEventListener('click',logout_user);
 fetch_question_bank_btn.addEventListener('click',fetch_Question_Bank);

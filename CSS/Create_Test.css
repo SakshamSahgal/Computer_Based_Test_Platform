@@ -57,3 +57,9 @@
     background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
     backdrop-filter: blur(6px);
 }
+
+.add_question_btn
+{
+    background-color:rgba(0, 255, 255, 0);
+    border: 0px;
+}
