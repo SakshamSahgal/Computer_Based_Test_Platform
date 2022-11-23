@@ -16,13 +16,25 @@
 {
     position: absolute;
     top : 25%;
-    left : 80%;
+    left : 72%;
+}
+
+#fetch_question_bank /* For Fetch Question Bank Button*/
+{
+    position: absolute;
+    left: 10%;
+    top: 15%;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
 }
 
 #Question_Added_table
 {
     background-color: rgba(240, 248, 255, 0.582);
     border: solid black 3px; 
+    width: 400px;
+    text-align: center;
 }
 
 #Question_to_add_MCQ_div
@@ -36,6 +48,8 @@
 {
     background-color: rgba(240, 248, 255, 0.582);
     border: solid black 3px; 
+    width: 400px;
+    text-align: center;
 }
 
 
@@ -58,8 +72,33 @@
     backdrop-filter: blur(6px);
 }
 
+#Question_pallet_table
+{
+    background-color: rgba(240, 248, 255, 0.582);
+    border: solid black 3px; 
+}
+
+#Question_pallet_table_div
+{
+    position: absolute;
+    top : 28%;
+    left: 29%;
+}
+
 .add_question_btn
 {
     background-color:rgba(0, 255, 255, 0);
     border: 0px;
+}
+
+#Description_Overlay /*Overlay for Displaying details of the seleted question */
+{
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    position: fixed; /* Stay in place */
+    left: 0;
+    top: 0;
+    background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+    backdrop-filter: blur(6px);
 }

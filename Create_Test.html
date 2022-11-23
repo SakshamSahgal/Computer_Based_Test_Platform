@@ -17,14 +17,33 @@
         <img src="GUI_Resources/Loading.gif" alt="" id="loading_img">
     </div>
 
+    <div id="Description_Overlay" hidden>
+        <div id="Question_pallet_table_div">
+            <table id="Question_pallet_table">
+                <tr> <td colspan="2" style="text-align: right;"> <button id="close_pallet_btn" style="border: 0px; background-color:rgba(0, 255, 255, 0);"> <img src="GUI_Resources/cancel.png" alt=""> </button> </td> </tr>
+                <tr><td>Question ID : </td> <td> <span style="resize: none;" id="Question_ID_val"></span> </td></tr>
+                <tr><td>Difficulty : </td> <td> <span id="difficulty_val"></span> </td></tr>
+                <tr><td>Authored By : </td> <td> <span id="authored_by"></span> </td></tr>
+                <tr><td>Question Description : </td> <td> <textarea style="resize: none;" id="Question_desc" cols="60" rows="10" disabled></textarea> </td></tr>
+                <tr><td>Option 1 value : </td> <td> <textarea style="resize: none;" id="opt_1_val" cols="60" rows="3" disabled></textarea> </td></tr>
+                <tr><td>Option 2 value : </td> <td> <textarea style="resize: none;" id="opt_2_val"  cols="60" rows="3" disabled></textarea> </td></tr>
+                <tr><td>Option 3 value : </td> <td> <textarea style="resize: none;" id="opt_3_val"  cols="60" rows="3" disabled></textarea> </td></tr>
+                <tr><td>Option 4 value : </td> <td> <textarea style="resize: none;" id="opt_4_val"  cols="60" rows="3" disabled></textarea> </td></tr>
+                <tr><td>correct option : </td> <td> <span style="resize: none;" id="correct_opt"></span> </td></tr>
+                <tr><td>Marks alloted : </td> <td> <input type="number" id="Marks_alloted" value="4"> </td></tr>
+                <tr><td colspan="2" style="text-align: center;"> <button id="add_to_test_btn">Add to Test</button> </td></tr>
+            </table>
+        </div>
+    </div>
+
     <button id="fetch_question_bank">Fetch Question Bank</button>
 
     <div id="Create_Test_div">
 
         <table id="Create_Test_Table">
             <tr> <td colspan="2" style="text-align: center;">Create Test</td> </tr>
-            <tr><td> Name of test : </td> <td> <input type="text"> </td></tr>
-            <tr> <td> Duration (minutes) : </td>  <td> <input type="number"> </td> </tr>
+            <tr><td> Name of test : </td> <td> <input type="text" id="test_name"> </td></tr>
+            <tr> <td> Duration (minutes) : </td>  <td> <input type="number" id="test_duration" value="60"> </td> </tr>
             <tr><td>No of questions : </td><td><span id="no_of_questions">0</span></td></tr>
             <tr><td>Max Marks : </td><td> <span id="max_marks">0</span> </td></tr>
         </table>
@@ -39,12 +58,10 @@
      
     <div id="Question_Added_table_div">
         <table id="Question_Added_table">
-            <th><td colspan="2">Questions Added</td></th>
-            <th><td>Questions ID</td> <td>Marks</td></th>
+            <tr><td colspan="2">Questions Added</td></tr>
+            <tr><td>Questions ID</td> <td>Marks</td></tr>
         </table>
     </div>
-
-    
     
     <!-- importing js cookie CDN library -->
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>  
