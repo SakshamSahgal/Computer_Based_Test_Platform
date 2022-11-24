@@ -25,6 +25,7 @@ var desc_overlay = document.getElementById("Description_Overlay"); //getting ref
 var create_Test_btn = document.getElementById("create_Test");
 
 var Cur_Test_Obj = { //Curent Test JSON Object that contains refrence to all test related HTML elements
+    Creater : document.getElementById("Name_of_Problem_setter"),
     Test_Name : document.getElementById("test_name"),
     Test_Duration : document.getElementById("test_duration") ,
     No_of_Questions : document.getElementById("no_of_questions"),
@@ -64,6 +65,7 @@ function redirect_to_homepage() //function locates back to Admin_Portal
 
 function assign_Profile() //this function assigns the profile div it's data for username
 {
+    Cur_Test_Obj.Creater.innerHTML = Cookies.get("Name"); //setting the creater name
     document.getElementById("logged_in_as").innerHTML = Cookies.get("Name"); //assigning values
 }
 
@@ -211,10 +213,9 @@ function create_this_test() //This function is called when user clicks on {creat
     {
         console.log("creating test");
         var path_directory = "Tests/" + Date.now();
-        console.log("directory = " + path_directory);
-        console.log("Storing " + Cur_Test_Obj );
 
         var Test_obj_to_Store = {
+            Creater : Cur_Test_Obj.Creater.innerHTML,
             Test_Name : Cur_Test_Obj.Test_Name.value,
             Test_Duration : Cur_Test_Obj.Test_Duration.value ,
             No_of_Questions : Cur_Test_Obj.No_of_Questions.innerHTML,
