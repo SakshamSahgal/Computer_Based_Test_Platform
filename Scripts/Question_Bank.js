@@ -47,7 +47,6 @@ var Question_Pallet = { //JSON object for HTML elements of question pallet
 //------------------------------------------------------------------------------- Functions -------------------------------------------------------------------
 
 
-
 function display_question(id,btn_id,values_obj) //this function is called when view button of any question is clicked
 {
     console.log(id);
@@ -97,7 +96,7 @@ function display_question(id,btn_id,values_obj) //this function is called when v
 function add_to_table(id,values_obj) //function inserts data into table (here values is a JSON object)
 {
     //inserting cells 
-    
+
     var table = document.getElementById(id);
     var row = table.insertRow(2); //inserting at the 1
     var Question_ID_cell = row.insertCell(0); //inserting at the 0th col (starting)
@@ -193,7 +192,6 @@ function edit_question() //this function is called when edit button is clicked
 
 function Update_Data() //this function is called when update data button is clicked
 {   
-     
     var correct_opt;
 
     for(var i=0;i<4;i++)

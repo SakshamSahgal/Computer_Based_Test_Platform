@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>STUDENT PORTAL</title>
+</head>
+<body>
+    <link rel="stylesheet" href="CSS/CommonCSS.css">
+    <link rel="stylesheet" href="CSS/Student_Portal.css">
+    <div id="Top_Bar"> <h2 style="text-align:center ; padding-top: 15px;"> STUDENT PORTAL </h2></div>
+    
+    <div id="Welcome_box">
+        <table id="logout_box_table">
+            <tr><td> <img src="GUI_Resources/user_ui2.png" height="40px"> </td> <td> <p id="logged_in_as"></p> </td>  <td> <button id="Logout_btn" style = " width: 80px ; height: 30px ;">Logout</button> </td>  </tr>
+        </table>
+    </div>
+
+    <div id="Load_overlay" hidden>
+        <img src="GUI_Resources/Loading.gif" alt="" id="loading_img">
+    </div>
+
+    <div>
+        <table id="Test_Data_Table">
+            <tr><td colspan="6"> <b>TESTS</b> </td></tr>
+            <tr><td>Test Name</td><td>Creator</td><td>No of Questions</td><td>Duration</td><td>Max Marks</td><td>Link</td></tr>
+        </table>
+    </div>
+    
+
+    <!-- importing js cookie CDN library -->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>  
+<script type="module" src="Scripts/Student_Portal.js"></script>
+</body>
+</html>
+

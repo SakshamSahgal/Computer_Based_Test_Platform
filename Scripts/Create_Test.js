@@ -212,9 +212,11 @@ function create_this_test() //This function is called when user clicks on {creat
     if (Cur_Test_Obj.Test_Name.value != "" && Cur_Test_Obj.No_of_Questions.innerHTML != "0")
     {
         console.log("creating test");
-        var path_directory = "Tests/" + Date.now();
+        var test_id = Date.now();
+        var path_directory = "Tests/" + test_id;
 
         var Test_obj_to_Store = {
+            Test_ID : test_id,
             Creater : Cur_Test_Obj.Creater.innerHTML,
             Test_Name : Cur_Test_Obj.Test_Name.value,
             Test_Duration : Cur_Test_Obj.Test_Duration.value ,
