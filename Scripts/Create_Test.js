@@ -22,12 +22,14 @@ var logout_button = document.getElementById("Logout_btn"); //Getting refrence to
 var fetch_question_bank_btn = document.getElementById("fetch_question_bank"); //Getting refrence to fetch question bank button
 var Load_overlay = document.getElementById("Load_overlay"); //Getting refrence to loading Overlay
 var desc_overlay = document.getElementById("Description_Overlay"); //getting refrence to Question Description overlay 
+var create_Test_btn = document.getElementById("create_Test");
 
 var Cur_Test_Obj = { //Curent Test JSON Object that contains refrence to all test related HTML elements
     Test_Name : document.getElementById("test_name"),
     Test_Duration : document.getElementById("test_duration") ,
     No_of_Questions : document.getElementById("no_of_questions"),
-    max_Marks : document.getElementById("max_marks") 
+    max_Marks : document.getElementById("max_marks") ,
+    Questions : []
 }
 
 //-----------------------------------------------------------------------Global variables----------------------------------------------------------------------//
@@ -115,7 +117,7 @@ function add_to_table(table_id) //function inserts data into table
         for (const [key, value] of Object.entries(fetched_Question_Bank_dict)) 
         {
             //console.log(key, value);
-            var row = table.insertRow(1);
+            var row = table.insertRow(2);
             var question_ID_Cell = row.insertCell(0);
             var add_image_cell = row.insertCell(1);
             question_ID_Cell.innerHTML = value.Question_ID;
@@ -203,5 +205,43 @@ function Add_Remove_Question(Question_ID) //function called when user presses an
 }
 
 
+function create_this_test() //This function is called when user clicks on {create a test} it pushes into database
+{
+    if (Cur_Test_Obj.Test_Name.value != "" && Cur_Test_Obj.No_of_Questions.innerHTML != "0")
+    {
+        console.log("creating test");
+        var path_directory = "Tests/" + Date.now();
+        console.log("directory = " + path_directory);
+        console.log("Storing " + Cur_Test_Obj );
+
+        var Test_obj_to_Store = {
+            Test_Name : Cur_Test_Obj.Test_Name.value,
+            Test_Duration : Cur_Test_Obj.Test_Duration.value ,
+            No_of_Questions : Cur_Test_Obj.No_of_Questions.innerHTML,
+            max_Marks :Cur_Test_Obj.max_Marks.innerHTML ,
+            Questions : []
+        }
+
+        for (const [key, value] of Object.entries(selected_Questions_dict)) 
+        {
+            console.log(key, value);
+            Test_obj_to_Store.Questions.push(value);
+        }
+
+        set(ref( db , path_directory ), Test_obj_to_Store )
+        .then(()=>{
+            alert("data stored successfully");
+            location.href = "./Create_Test.html";
+        })
+        .catch((error)=>{
+            alert("unsuccessful, error = " + error);
+        });
+
+    }
+    else
+        alert("Please Make a valid Test");
+}
+
 logout_button.addEventListener('click',logout_user);
 fetch_question_bank_btn.addEventListener('click',fetch_Question_Bank);
+create_Test_btn.addEventListener('click',create_this_test);
