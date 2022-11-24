@@ -1,0 +1,36 @@
+
+
+
+/*--------------------------------------------------------------------------------CONFIRMATION OVERLAY---------------------------------------------------------------------------*/
+#Overlay
+{
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+  backdrop-filter: blur(6px);
+}
+
+#confirmation_div
+{
+    position: absolute;
+    top:45%;
+    left: 44%;
+    width: 12%;
+    height: 8%;
+    text-align: center;
+    background-color: azure;
+    border-radius: 25px;
+}
+
+#confirmation_table
+{
+    position: absolute;
+    top: 20%;
+    left: 8%;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

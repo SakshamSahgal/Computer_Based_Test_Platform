@@ -40,7 +40,7 @@ function assign_Profile() //this function assigns the profile div it's data for 
 
 
 
-function Fetch_Test_Data_from_Database() //this function is called to fetch Test Data from firebase Database
+function Fetch_Test_Data_from_Database() //This function is called to fetch Test Data from firebase Database
 {
     Load_Overlay.hidden = false; //revealing the load overlay
     var path_directory = "Tests/";
@@ -48,7 +48,7 @@ function Fetch_Test_Data_from_Database() //this function is called to fetch Test
     .then((snapshot)=>{
         if( snapshot.exists() ) 
         {
-            alert("exists");
+            //alert("exists");
             var obj = snapshot.val(); //getting the JSON object from the database
             console.log(obj); //read values like this
             Load_Overlay.hidden = true; //Hiding the load overlay after it has been loaded completely
@@ -80,17 +80,28 @@ function add_to_table(id) //function inserts data into table
         var Test_name_Cell = row.insertCell(0); //inserting at the 0th col (starting)
         var Creator_Cell = row.insertCell(1); //inserting at the 1th col
         var No_of_Questions_Cell = row.insertCell(2); //inserting at the 2th col
-        var Duration_Cell = row.insertCell(3); //inserting at the 2th col
-        var Max_Marks_Cell = row.insertCell(4); //inserting at the 3th col
-        var Link_Cell = row.insertCell(5); //inserting at the 4th col
+        var Duration_Cell = row.insertCell(3); //inserting at the 3th col
+        var Max_Marks_Cell = row.insertCell(4); //inserting at the 4th col
+        var Link_Cell = row.insertCell(5); //inserting at the 5th col
 
         Test_name_Cell.innerHTML = value.Test_Name;
         Creator_Cell.innerHTML = value.Creater;
         No_of_Questions_Cell.innerHTML = value.No_of_Questions;
         Duration_Cell.innerHTML = value.Test_Duration;
         Max_Marks_Cell.innerHTML = value.max_Marks;
-        Link_Cell.innerHTML = "<Button> Click </Button>";
+
+        var btn_id = "test," + value.Test_ID;
+
+        Link_Cell.innerHTML = "<Button id=" + btn_id + "> Take Test </Button>";
+        document.getElementById(btn_id).addEventListener('click',goto_Test.bind(null,value.Test_ID));
     }
+}
+
+function goto_Test(test_id)
+{
+    console.log(test_id);
+    Cookies.set("Current_test_id",test_id); //setting cookie for curent test
+    location.href = "./CBT_Test.html";
 }
 
 function logout_user() //function is called when logout button is clicked

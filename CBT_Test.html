@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>CBT Test</title>
+</head>
+<body>
+    <link rel="stylesheet" href="CSS/CommonCSS.css">
+    <link rel="stylesheet" href="CSS/CBT_Test.css">
+    <div id="Top_Bar"> <h2 style="text-align:center ; padding-top: 15px;"> CBT TEST </h2></div>
+    
+    <div id="Welcome_box">
+        <table id="logout_box_table">
+            <tr><td> <img src="GUI_Resources/user_ui2.png" height="40px"> </td> <td> <p id="logged_in_as"></p> </td>  <td> <button id="Logout_btn" style = " width: 80px ; height: 30px ;">Logout</button> </td>  </tr>
+        </table>
+    </div>
+
+    <div id="Overlay">
+        <div id="confirmation_div">
+            <table id="confirmation_table">
+                <tr><td colspan="2" id="">Start_Test?</td></tr>
+                <tr><td><button id="confirmation_ans_no">NO</button></td><td><button id="confirmation_ans_yes">YES</button></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- importing js cookie CDN library -->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>  
+<script type="module" src="Scripts/CBT_Test.js"></script>
+</body>
+</html>

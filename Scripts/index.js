@@ -55,7 +55,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
                             location.href = "./Admin_Portal.html";
                         }
                         else
+                        {
+                            load_overlay.hidden = true;
                             alert("Wrong UserID/Password");
+                        }
                     })
                     .catch((error)=>{
                         alert("unsuccessful, error = " + error);
@@ -76,7 +79,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
                             location.href = "./Problem_Setter_Portal.html";
                         }
                         else
+                        {
+                            load_overlay.hidden = true;
                             alert("Wrong UserID/Password");
+                        }
                     })
                     .catch((error)=>{
                         alert("unsuccessful, error = " + error);
@@ -97,7 +103,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
                             location.href = "./Student_Portal.html";
                         }
                         else
+                        {
+                            load_overlay.hidden = true;
                             alert("Wrong UserID/Password");
+                        }
                     })
                     .catch((error)=>{
                         alert("unsuccessful, error = " + error);
