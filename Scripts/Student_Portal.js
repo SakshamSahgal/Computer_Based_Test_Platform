@@ -101,7 +101,7 @@ function goto_Test(test_id)
 {
     console.log(test_id);
     Cookies.set("Current_test_id",test_id); //setting cookie for curent test
-    location.href = "./CBT_Test.html";
+    location.href = "./Test_Portal.html";
 }
 
 function logout_user() //function is called when logout button is clicked
