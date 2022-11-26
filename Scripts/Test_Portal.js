@@ -114,7 +114,7 @@ function Add_Questions_to_pallet() //this function Adds Question buttons to Ques
                 questions_added++;
                 //console.log(questions_added);
                 var cell = row.insertCell(j);
-                var btn_id = "ques,"+questions_added;
+                var btn_id = "ques,"+Test_obj.Questions[questions_added-1].Question_ID;
                 
                 cell.innerHTML = "<button class = 'question_pallet_buttons' id = " + btn_id + " style='text-align:center;' >" + questions_added +"</button>";
                 var this_Question_obj = JSON.parse(JSON.stringify(Test_obj.Questions[questions_added-1])); //getting this question object
@@ -160,9 +160,10 @@ function Clicked_Question(Question_obj) //this function is called when the user 
     });
 }
 
-function Fill_Question_Details(Question_obj_from_test_array) //this function displays current question details
+function Fill_Question_Details(Question_obj_from_test_array) //this function displays current question details (called when user clicks on a question button)
 {
     //Adding current question details to the HTML
+
     Question_Details_Obj.Marks.innerHTML = Question_obj_from_test_array.Marks;
     Question_Details_Obj.Question_Description.innerHTML = current_Question_Obj.Description;
     Question_Details_Obj.Option_1.innerHTML = current_Question_Obj.Option1;
@@ -173,7 +174,6 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
     Question_Details_Obj.Radio_Option_2.checked =  ( Candidate_Answers[Question_obj_from_test_array.Question_ID] === undefined ) ?  false : Candidate_Answers[Question_obj_from_test_array.Question_ID].Option2;
     Question_Details_Obj.Radio_Option_3.checked =  ( Candidate_Answers[Question_obj_from_test_array.Question_ID] === undefined ) ?  false : Candidate_Answers[Question_obj_from_test_array.Question_ID].Option3;
     Question_Details_Obj.Radio_Option_4.checked =  ( Candidate_Answers[Question_obj_from_test_array.Question_ID] === undefined ) ?  false : Candidate_Answers[Question_obj_from_test_array.Question_ID].Option4;
-
 
      //if Question is already answered then just replace already answered values
 
@@ -187,6 +187,8 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
 
     //assigning the Answer object it's question id
     Answer_Object.Question_ID = Question_obj_from_test_array.Question_ID;
+    var btn_id = "ques," + Question_obj_from_test_array.Question_ID; //getting button ID of clicked question button
+    
 
     Question_Details_Obj.Radio_Option_1.onclick = function(){
         Answer_Object.Option1 = true;
@@ -194,6 +196,7 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
         Answer_Object.Option3 = false;
         Answer_Object.Option4 = false;
         Candidate_Answers[Answer_Object.Question_ID] = Answer_Object;
+        document.getElementById(btn_id).classList.add("Answered_Btn");  //if any option is clicked then add clicked css class to button
         console.log(Candidate_Answers);
     }
 
@@ -203,6 +206,7 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
         Answer_Object.Option3 = false;
         Answer_Object.Option4 = false;
         Candidate_Answers[Answer_Object.Question_ID] = Answer_Object;
+        document.getElementById(btn_id).classList.add("Answered_Btn");  //if any option is clicked then add clicked css class to button
         console.log(Candidate_Answers);
     }
     
@@ -212,6 +216,7 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
         Answer_Object.Option3 = true;
         Answer_Object.Option4 = false;
         Candidate_Answers[Answer_Object.Question_ID] = Answer_Object;
+        document.getElementById(btn_id).classList.add("Answered_Btn"); //if any option is clicked then add clicked css class to button
         console.log(Candidate_Answers);
     }
 
@@ -221,6 +226,7 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
         Answer_Object.Option3 = false;
         Answer_Object.Option4 = true;
         Candidate_Answers[Answer_Object.Question_ID] = Answer_Object;
+        document.getElementById(btn_id).classList.add("Answered_Btn"); //if any option is clicked then add clicked css class to button
         console.log(Candidate_Answers);
     }
     

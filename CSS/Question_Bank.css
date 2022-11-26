@@ -13,7 +13,7 @@
     width: 360px;
     position: absolute;
     left: 5%;
-    top: 10%;
+    top: 2%;
     border: black;
 }
 
@@ -112,3 +112,20 @@
 }
 
 /*--------------------------------------------------------------------------------------------------------------------------*/
+
+#Question_bank_Holder_div
+{
+    border-radius: 10px;
+    position: absolute;
+    border-style: dotted dashed solid double;
+    width: 420px;
+    height: 200px;
+    margin-left: 2%;
+    margin-top: 2%;
+    z-index: 1;  
+    display: flex;
+    flex-direction: column;
+    min-height: 77vh;
+    overflow: auto;
+    background-color:#e8e0d77e
+}
