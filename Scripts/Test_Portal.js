@@ -19,7 +19,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
 
 //------------------------------------------------------------------- Refrences -------------------------------------------------------------------
 
-
+var timer = document.getElementById("timer"); //getting refrence to timer 
 var logout_button = document.getElementById("Logout_btn"); //Getting refrence to Logout button
 var confirmation_overlay = document.getElementById("Overlay"); //getting refrence to overlay object
 var confirmation_overlay_no_btn = document.getElementById("confirmation_ans_no"); //getting refrence to confirmation overlay no ans button
@@ -89,6 +89,7 @@ function proceed_test() //this function is called when user presses yes on start
     console.log("got test object = ");
     console.log(Test_obj);//printing test object got from cookies
     Add_Questions_to_pallet();
+    Start_Timer(); //starting the timer
 }
 
 function shuffle(a) //this function shuffles the array passed to it
@@ -230,6 +231,25 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
         console.log(Candidate_Answers);
     }
     
+}
+
+
+function Start_Timer()
+{
+    var time =(parseInt(JSON.parse(Cookies.get("Current_test_data")).Test_Duration))*60; //setting the start time
+    timer.innerHTML = time;
+    var my_timer = setInterval(function(){
+        console.log("time running");
+         var cur_time = parseInt(timer.innerHTML);
+        if(cur_time != 0)
+            cur_time--;
+        else
+        {
+            alert("time_up");
+            clearInterval(my_timer);
+        }
+        timer.innerHTML = (cur_time);
+    },1000);
 }
 
 logout_button.addEventListener('click',logout_user);
