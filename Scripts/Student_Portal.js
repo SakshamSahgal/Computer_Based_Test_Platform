@@ -99,9 +99,11 @@ function add_to_table(id) //function inserts data into table
 
 function goto_Test(test_id)
 {
-    console.log(test_id);
-    Cookies.set("Current_test_id",test_id); //setting cookie for curent test
-    location.href = "./Test_Portal.html";
+    console.log(Test_Data_obj[test_id]);
+    Cookies.set("Current_test_data",Test_Data_obj[test_id]); //setting cookie for curent test (key = current_test_data) (value = test object) 
+    location.href = "./Test_Portal.html"; //redirecting to test portal
+    //console.log(Cookies.get("Current_test_data"));
+    //console.log(JSON.parse(Cookies.get("Current_test_data")).Test_ID);
 }
 
 function logout_user() //function is called when logout button is clicked

@@ -14,6 +14,12 @@
   backdrop-filter: blur(6px);
 }
 
+#Question_Details_table td
+{
+    /* border: 2px solid black; */
+    border-radius: 20px;
+}
+
 #confirmation_div
 {
     position: absolute;
@@ -29,8 +35,9 @@
 #confirmation_table
 {
     position: absolute;
-    top: 20%;
-    left: 8%;
+    text-align: center;
+    top: 18%;
+    left: 28%;
 }
 
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -57,10 +64,61 @@
     backdrop-filter: blur(6px);
 }
 
-/*--------------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------Right Question Pallet-----------------------------------------*/
 
 .question_pallet_buttons
 {
-   width: 35px;
-   height: 35px;
+   width: 45px;
+   height: 45px;
+}
+
+#Question_Pallet
+{
+    position: relative;
+    width: 252px;
+    top : 30%;
+    left :5%;
+    background-color: rgba(255, 255, 255, 0.565);
+}
+
+#right_bar
+{
+    border-radius: 10px;
+    position: absolute;
+    border-style: dotted dashed solid double;
+    width: 340px;
+    padding-top: 2%;
+    margin-top: 5%;
+    margin-left: 80%;
+    z-index: 0;  
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+    overflow: auto;
+    background-color:#c2ffc27e
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+#Question_details
+{
+    position: absolute;
+    top: 30%;
+    left: 20%;
+}
+
+#Question_Details_table
+{
+    width: 700px;
+    height: 400px;
+    background-color: #c2ffc27e;
+    border-radius: 20px;
+}
+
+/*------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+.Answered_Btn /*Class applied to button which is selected*/
+{
+    background-color: rgba(169, 255, 169, 0.715);
 }
