@@ -21,12 +21,24 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
 
 var timer = document.getElementById("timer"); //getting refrence to timer 
 var logout_button = document.getElementById("Logout_btn"); //Getting refrence to Logout button
+
+//getting refrence to confirmation start test overlay
+
 var confirmation_overlay = document.getElementById("Overlay"); //getting refrence to overlay object
 var confirmation_overlay_no_btn = document.getElementById("confirmation_ans_no"); //getting refrence to confirmation overlay no ans button
 var confirmation_overlay_yes_btn = document.getElementById("confirmation_ans_yes"); //getting refrence to confirmation overlay yes ans button
+
+//getting refrence to confirmation submit test overlay 
+var submit_overlay = document.getElementById("Overlay_for_submission"); //getting refrence to submit overlay
+var submit_no_btn = document.getElementById("submit_no");
+var submit_yes_btn = document.getElementById("submit_yes");
+
+var submit_test_btn = document.getElementById("Submit_Test_btn");
+
 var question_pallet_table = document.getElementById("Question_Pallet_table"); //Question Pallet Table
 var Load_Overlay = document.getElementById("Load_overlay");
 var Question_Details_div = document.getElementById("Question_details");
+
 var Question_Details_Obj = { //JSON object to store html elements for displaying Question 
     Marks : document.getElementById("Marks"),
     Question_Description : document.getElementById("Question_Description"),
@@ -41,12 +53,15 @@ var Question_Details_Obj = { //JSON object to store html elements for displaying
 }
 
 
+
+
 //--------------------------------------------------------------------------Global Variables---------------------------------------------------------
 
 var Candidate_Answers = {}; //creating a Dictionary to store answers answered by the candidate with Key = Question ID and values = Answer Object
+var Correct_Answer = {}; //creating a dictionary to store correct answers of each question with key = {Question ID} and value = correct_opt
 var Test_obj; //object that stores the data of the current test
 var current_Question_Obj; //object that stores the data of the currently loaded Question
-
+var Question_marks = {} //dictionary that stores marks of each question key = {Question ID} values = {marks}
 //-------------------------------------------------------------------- Functions ----------------------------------------------------
 
 function redirect_to_homepage() //function locates back to Admin_Portal
@@ -116,9 +131,13 @@ function Add_Questions_to_pallet() //this function Adds Question buttons to Ques
                 //console.log(questions_added);
                 var cell = row.insertCell(j);
                 var btn_id = "ques,"+Test_obj.Questions[questions_added-1].Question_ID;
-                
-                cell.innerHTML = "<button class = 'question_pallet_buttons' id = " + btn_id + " style='text-align:center;' >" + questions_added +"</button>";
+
+                Question_marks[Test_obj.Questions[questions_added-1].Question_ID] = Test_obj.Questions[questions_added-1].Marks; //getting marks of each question 
+
+                cell.innerHTML = "<button class = 'question_pallet_buttons' id = " + btn_id + " style='text-align:center;' >" + questions_added +"</button>"; //Creating Question buttons in the Question Pallet 
+
                 var this_Question_obj = JSON.parse(JSON.stringify(Test_obj.Questions[questions_added-1])); //getting this question object
+                
                 document.getElementById(btn_id).addEventListener('click',Clicked_Question.bind(null,this_Question_obj)); //assigning click event listener to each button with passing the question details (stored in the test object) of the particular question
             }
             else
@@ -131,7 +150,6 @@ function Add_Questions_to_pallet() //this function Adds Question buttons to Ques
             break;
     }
 }
-
 
 
 //this passed question object only contains {question_id and marks} since it is from the test object
@@ -149,7 +167,8 @@ function Clicked_Question(Question_obj) //this function is called when the user 
             current_Question_Obj = snapshot.val();
             console.log(current_Question_Obj);
             Fill_Question_Details(Question_obj);
-            Load_Overlay.hidden = true;
+            Load_Overlay.hidden = true; //hiding the loading overlay
+            Correct_Answer[current_Question_Obj.Question_ID] = current_Question_Obj.Correct_Option; //getting the correct answer of this question in the dictionary
         }
         else
         {
@@ -163,6 +182,7 @@ function Clicked_Question(Question_obj) //this function is called when the user 
 
 function Fill_Question_Details(Question_obj_from_test_array) //this function displays current question details (called when user clicks on a question button)
 {
+
     //Adding current question details to the HTML
 
     Question_Details_Obj.Marks.innerHTML = Question_obj_from_test_array.Marks;
@@ -190,7 +210,6 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
     Answer_Object.Question_ID = Question_obj_from_test_array.Question_ID;
     var btn_id = "ques," + Question_obj_from_test_array.Question_ID; //getting button ID of clicked question button
     
-
     Question_Details_Obj.Radio_Option_1.onclick = function(){
         Answer_Object.Option1 = true;
         Answer_Object.Option2 = false;
@@ -230,11 +249,10 @@ function Fill_Question_Details(Question_obj_from_test_array) //this function dis
         document.getElementById(btn_id).classList.add("Answered_Btn"); //if any option is clicked then add clicked css class to button
         console.log(Candidate_Answers);
     }
-    
 }
 
 
-function Start_Timer()
+function Start_Timer() //this function is called when user clicks on yes in start test confirmation (it starts the timer)
 {
     var time =(parseInt(JSON.parse(Cookies.get("Current_test_data")).Test_Duration))*60; //setting the start time
     timer.innerHTML = time;
@@ -252,6 +270,81 @@ function Start_Timer()
     },1000);
 }
 
+
+function submit_test() //this function is called when user clicks on yes btn in submit confirmation
+{
+    console.log("submitting test");
+    var path_directory = "Test_Results/" + Test_obj.Test_ID;
+
+    submit_overlay.hidden = true; //hidding the submit overlay
+    Load_Overlay.hidden = false; //revealing the load overlay
+    
+    Attempted_Array = []; //an array of objects which contains JSON object with parameters {choosed option , correct option}
+
+    for (const [key, value] of Object.entries(Candidate_Answers))  //Iterating over the Candidate_Answers Dictionary (means the questions he attempted)
+    {
+        console.log(key,value);
+        
+        var choosed_option;
+        
+        if (parseInt(Candidate_Answers.Option1) == true)
+            choosed_option = 1;
+        else if (parseInt(Candidate_Answers.Option2) == true)
+            choosed_option = 2;
+        else if (parseInt(Candidate_Answers.Option3) == true)
+            choosed_option = 3;
+        else
+            choosed_option = 4;
+
+        var score = 0;
+        if( !(Correct_Answer[Candidate_Answers.Question_ID] === undefined) )
+        {
+            var attempted_obj = {
+                Choosed_Option : parseInt(choosed_option),
+                Correct_Option : parseInt(Correct_Answer[Candidate_Answers.Question_ID]),
+                Marks : parseInt(Question_marks[Candidate_Answers.Question_ID])
+            }
+
+             if( attempted_obj.Choosed_Option == attempted_obj.Correct_Option)
+                 score += attempted_obj.Marks;
+             
+             Attempted_Array.push(attempted_obj);
+        }
+    }
+
+
+    var JSON_to_Insert = {
+        Test_ID : Test_obj.Test_ID,
+        User_ID : Cookies.get("user_id"),
+        attempted : Attempted_Array , 
+        Score : score ,
+        Remaining_Seconds : parseInt(timer.innerHTML)
+    }
+    
+
+    set(ref( db , path_directory ), { JSON_to_Insert })
+    .then(()=>{
+        alert("data stored successfully");
+    })
+    .catch((error)=>{
+        alert("unsuccessful, error = " + error);
+    });
+
+}
+
+function dont_submit_test() //this function is called when user clicks on no submit test btn
+{
+    submit_overlay.hidden = true;
+}
+
+function Display_submit_Overlay() //this function is called when user clicks on submit test btn
+{
+    submit_overlay.hidden = false;
+}
+
 logout_button.addEventListener('click',logout_user);
 confirmation_overlay_no_btn.addEventListener('click',back_to_student_portal);
 confirmation_overlay_yes_btn.addEventListener('click',proceed_test);
+submit_no_btn.addEventListener('click',dont_submit_test);
+submit_yes_btn.addEventListener('click',submit_test);
+submit_test_btn.addEventListener('click',Display_submit_Overlay);
