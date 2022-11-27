@@ -156,6 +156,8 @@ function Add_Questions_to_pallet() //this function Adds Question buttons to Ques
 function Clicked_Question(Question_obj) //this function is called when the user clicks on any of the question button from Question pallet (with the question object passed)
 {
     Question_Details_div.hidden = false;
+
+    console.log("Question_Button_Clicked , Question Object Details -> ");
     console.log(Question_obj);
     Load_Overlay.hidden = false; //Revealing the loading Overlay 
     var path_directory = "Question_Bank/MCQs/" + Question_obj.Question_ID;
@@ -265,13 +267,14 @@ function Start_Timer() //this function is called when user clicks on yes in star
         {
             alert("time_up");
             clearInterval(my_timer);
+            submit_test(); //when time is up , just submit test
         }
         timer.innerHTML = (cur_time);
     },1000);
 }
 
 
-function submit_test() //this function is called when user clicks on yes btn in submit confirmation
+function submit_test() //this function is called when user clicks on yes btn in submit confirmation or when time runs out
 {
     console.log("submitting test");
     var path_directory = "Test_Results/" + Test_obj.Test_ID;
@@ -279,7 +282,8 @@ function submit_test() //this function is called when user clicks on yes btn in 
     submit_overlay.hidden = true; //hidding the submit overlay
     Load_Overlay.hidden = false; //revealing the load overlay
     
-    Attempted_Array = []; //an array of objects which contains JSON object with parameters {choosed option , correct option}
+    var Attempted_Array = []; //an array of objects which contains JSON object with parameters {choosed option , correct option}
+    var score = 0;
 
     for (const [key, value] of Object.entries(Candidate_Answers))  //Iterating over the Candidate_Answers Dictionary (means the questions he attempted)
     {
@@ -287,44 +291,51 @@ function submit_test() //this function is called when user clicks on yes btn in 
         
         var choosed_option;
         
-        if (parseInt(Candidate_Answers.Option1) == true)
+        if ((value.Option1) == true)
             choosed_option = 1;
-        else if (parseInt(Candidate_Answers.Option2) == true)
+        else if ((value.Option2) == true)
             choosed_option = 2;
-        else if (parseInt(Candidate_Answers.Option3) == true)
+        else if ((value.Option3) == true)
             choosed_option = 3;
         else
             choosed_option = 4;
 
-        var score = 0;
-        if( !(Correct_Answer[Candidate_Answers.Question_ID] === undefined) )
+
+        console.log("choosed option for " + value.Question_ID + "is = " + choosed_option + " correct ans = " + parseInt(Correct_Answer[value.Question_ID])); 
+
+        if( !(Correct_Answer[value.Question_ID] === undefined) )
         {
             var attempted_obj = {
+                Question_ID : value.Question_ID,
                 Choosed_Option : parseInt(choosed_option),
-                Correct_Option : parseInt(Correct_Answer[Candidate_Answers.Question_ID]),
-                Marks : parseInt(Question_marks[Candidate_Answers.Question_ID])
+                Correct_Option : parseInt(Correct_Answer[value.Question_ID]),
+                Marks : parseInt(Question_marks[value.Question_ID])
             }
-
+            
              if( attempted_obj.Choosed_Option == attempted_obj.Correct_Option)
                  score += attempted_obj.Marks;
              
-             Attempted_Array.push(attempted_obj);
+             Attempted_Array.push(JSON.parse(JSON.stringify(attempted_obj)));
         }
     }
 
+    console.log("attempted_Array = ");
+    console.log(Attempted_Array);
 
     var JSON_to_Insert = {
         Test_ID : Test_obj.Test_ID,
         User_ID : Cookies.get("user_id"),
-        attempted : Attempted_Array , 
+        Attempted : Attempted_Array , 
         Score : score ,
         Remaining_Seconds : parseInt(timer.innerHTML)
     }
-    
 
-    set(ref( db , path_directory ), { JSON_to_Insert })
+
+    set(ref( db , path_directory ),JSON_to_Insert)
     .then(()=>{
+        Load_Overlay.hidden = true; //hiding the load_Overlay
         alert("data stored successfully");
+        location.href = "./Result_Section.html"; //Redirecting to Result_Section.html
     })
     .catch((error)=>{
         alert("unsuccessful, error = " + error);

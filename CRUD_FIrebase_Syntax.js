@@ -1,7 +1,7 @@
 
 //Create Entry => 
 
-    set(ref( database_refrence , path_directory ), { JSON_to_Insert })
+    set(ref( database_refrence , path_directory ), JSON_to_Insert )
     .then(()=>{
         alert("data stored successfully");
     })
