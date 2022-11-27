@@ -277,8 +277,7 @@ function Start_Timer() //this function is called when user clicks on yes in star
 function submit_test() //this function is called when user clicks on yes btn in submit confirmation or when time runs out
 {
     console.log("submitting test");
-    var path_directory = "Test_Results/" + Test_obj.Test_ID;
-
+    
     submit_overlay.hidden = true; //hidding the submit overlay
     Load_Overlay.hidden = false; //revealing the load overlay
     
@@ -302,7 +301,7 @@ function submit_test() //this function is called when user clicks on yes btn in 
 
 
         console.log("choosed option for " + value.Question_ID + "is = " + choosed_option + " correct ans = " + parseInt(Correct_Answer[value.Question_ID])); 
-
+        
         if( !(Correct_Answer[value.Question_ID] === undefined) )
         {
             var attempted_obj = {
@@ -313,7 +312,7 @@ function submit_test() //this function is called when user clicks on yes btn in 
             }
             
              if( attempted_obj.Choosed_Option == attempted_obj.Correct_Option)
-                 score += attempted_obj.Marks;
+             score += attempted_obj.Marks;
              
              Attempted_Array.push(JSON.parse(JSON.stringify(attempted_obj)));
         }
@@ -329,7 +328,8 @@ function submit_test() //this function is called when user clicks on yes btn in 
         Score : score ,
         Remaining_Seconds : parseInt(timer.innerHTML)
     }
-
+    
+    var path_directory = "Test_Results/" + Test_obj.Test_ID + Cookies.get("user_id");
 
     set(ref( db , path_directory ),JSON_to_Insert)
     .then(()=>{

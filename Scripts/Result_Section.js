@@ -52,7 +52,10 @@ function Display_Result(Result_Data_Obj)
         Question_Marks_cell.innerHTML = Result_Data_Obj.Attempted[i].Marks;
         Attempted_Option_cell.innerHTML = Result_Data_Obj.Attempted[i].Choosed_Option;
         Correct_Option_cell.innerHTML = Result_Data_Obj.Attempted[i].Correct_Option;
-        Status_Cell.innerHTML = "-";
+        if(Result_Data_Obj.Attempted[i].Correct_Option == Result_Data_Obj.Attempted[i].Choosed_Option)
+            Status_Cell.innerHTML = "<img src = 'GUI_Resources/accept.png' >";
+        else
+        Status_Cell.innerHTML = "<img src = 'GUI_Resources/cancel.png' >";
     }
     
 }
@@ -60,8 +63,9 @@ function Display_Result(Result_Data_Obj)
 function Fetch_Data()
 {
     var Test_ID = JSON.parse(Cookies.get("Current_test_data")).Test_ID;
+    var User_ID = JSON.parse(Cookies.get("user_id"));
     Load_Overlay.hidden = false; //displaying the load overlay
-    var path_directory = "Test_Results/" + Test_ID;
+    var path_directory = "Test_Results/" + Test_ID + User_ID;
 
     get(ref( db , path_directory ))
     .then((snapshot)=>{
