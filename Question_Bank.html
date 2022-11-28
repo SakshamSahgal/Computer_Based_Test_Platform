@@ -4,7 +4,6 @@
     <title>Question Bank</title>
 </head>
 <body>
-
     <link rel="stylesheet" href="CSS/CommonCSS.css">
     <link rel="stylesheet" href="CSS/Question_Bank.css">
     <div id="Top_Bar"> <h2 style="text-align:center ; padding-top: 15px;"> Question Bank </h2></div>
@@ -14,15 +13,21 @@
         </table>
     </div>
 
-    <button id="fetch_MCQs">Fetch Mcqs Bank</button>
+    <!-- <button id="fetch_MCQs">Fetch Mcqs Bank</button> -->
 
     <div id="Question_bank_Holder_div">
         <table id="MCQ_Bank_table">
-            <tr><td colspan="3">MCQs</td></tr>
-            <tr><td>Question ID</td><td style="width: 20px;" >View</td></tr>
+            <tr><td colspan="3">Authentic Questions</td></tr>
+            <tr><td>Question ID</td><td style="width: 20px;" >View</td> <td>Votes</td></tr>
         </table>
     </div>
    
+    <div id="Questions_For_Review_Holder_Div">
+        <table id="Questions_For_Review_table">
+            <tr><td colspan="3">Questions For Review</td></tr>
+            <tr><td>Question ID</td><td style="width: 20px;" >View</td> <td>Votes</td></tr>
+        </table>
+    </div>
 
     <div id="Load_overlay" hidden>
         <img src="GUI_Resources/Loading.gif" alt="" id="loading_img">
@@ -39,6 +44,7 @@
     
     <div id="Question_Pallet_holder_div" hidden>
         <table id="Question_pallet_table">
+            <tr><td>Upvote : <button id="Upvote_Btn"><img src="GUI_Resources/Upvote.png" alt=""></button></td><td>Authenticity Count : <span id="Authenticity_Vote"></span></td><td>Downvote : <button id="Downvote_Btn"><img src="GUI_Resources/Downvote.png" alt=""></button></td></tr>
             <tr><td colspan="3" style="background-color: rgba(0, 255, 157, 0.3);">  <div> <table> <tr> <td> <button style = "background-color: transparent;" id="Edit_Button"> <img src="GUI_Resources/Edit_Icon.png" id="Edit_btn_img"> </button> </td> <td> <button style = "background-color: transparent;" id="Delete_Button" > <img src="GUI_Resources/Delete_Icon.png" alt=""> </button>  </td> </tr> </table>  </div>  </td></tr>
             <tr><th colspan="3" style="text-align: center;"> <img src="GUI_Resources/Down_Arrow.png" alt=""> </th></tr>
             <tr><td colspan="3" style="background-color: rgba(84, 238, 255, 0.3);"> <span id="Cur_Question_ID"> </span> </td> </tr>
@@ -54,6 +60,8 @@
             <tr id="Update_row" hidden ><td colspan="3" style="text-align: center;"><button id="Update_Question">UPDATE</button></td></tr>
         </table>
     </div>
+
+    
 
      <!-- importing js cookie CDN library -->
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>

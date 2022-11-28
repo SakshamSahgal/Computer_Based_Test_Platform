@@ -1,28 +1,11 @@
-#MCQ_Bank_table tr /*CSS for MCQ_Bank_table table Rows */
-{
-    width: 300px;
-    border: solid;
-    border-color: black;
-    border-width: 0px;
-    text-align: center;
-    background-color: rgba(240, 248, 255, 0.37);
-}
 
-#MCQ_Bank_table /* For */
-{
-    width: 360px;
-    position: absolute;
-    left: 5%;
-    top: 2%;
-    border: black;
-}
 
 
 #Question_Pallet_holder_div
 {
     width: 782px;
     position: absolute;
-    left: 47%;  
+    left: 57%;  
     top: 25%;
 }
 
@@ -111,7 +94,7 @@
     backdrop-filter: blur(6px);
 }
 
-/*--------------------------------------------------------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------Question Bank Table--------------------------------------------------*/
 
 #Question_bank_Holder_div
 {
@@ -130,3 +113,64 @@
     background-color:#e8e0d77e
 }
 
+#MCQ_Bank_table tr /*CSS for MCQ_Bank_table table Rows */
+{
+    width: 300px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+#MCQ_Bank_table /* For */
+{
+    width: 360px;
+    position: absolute;
+    left: 5%;
+    top: 2%;
+    border: black;
+}
+
+/*-----------------------------------------------Questions For review--------------------------------------------------------*/
+
+#Questions_For_Review_Holder_Div
+{
+    border-radius: 10px;
+    position: absolute;
+    border-style: dotted dashed solid double;
+    width: 420px;
+    height: 200px;
+    margin-left: 25%;
+    margin-top: 2%;
+    z-index: 1;  
+    display: flex;
+    flex-direction: column;
+    min-height: 77vh;
+    overflow: auto;
+    background-color:#e8e0d77e;
+}
+
+#Questions_For_Review_table tr /*CSS for Question For review table Rows */
+{
+    width: 300px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+
+#Questions_For_Review_table
+{
+    width: 300px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    position: relative;
+    left: 10%;
+    top: 3%;
+    background-color: rgba(240, 248, 255, 0.37);
+}

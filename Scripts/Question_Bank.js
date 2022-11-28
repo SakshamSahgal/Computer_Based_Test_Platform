@@ -20,13 +20,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebas
 //------------------------------------------------------------------------------- Refrences -------------------------------------------------------------------
 
 var logout_button = document.getElementById("Logout_btn");
-var fetch_MCQs = document.getElementById("fetch_MCQs"); 
 var del_Confirm_yes_btn = document.getElementById("confirmation_ans_yes");
 var del_Confirm_no_btn = document.getElementById("confirmation_ans_no");
 var confirmation_overlay = document.getElementById("Overlay");
 var loading_overlay = document.getElementById("Load_overlay");
 //Question Pallet elements Object
 var Question_Pallet = { //JSON object for HTML elements of question pallet
+    Authenticity_Count : document.getElementById("Authenticity_Vote"),
+    Upvote_Btn : document.getElementById("Upvote_Btn"),
+    Downvote_Btn : document.getElementById("Downvote_Btn"),
     Edit_Btn : document.getElementById("Edit_Button"), 
     Edit_Btn_img : document.getElementById("Edit_btn_img"),
     Delete_Btn : document.getElementById("Delete_Button"),
@@ -43,6 +45,7 @@ var Question_Pallet = { //JSON object for HTML elements of question pallet
     update_row : document.getElementById("Update_row") ,
     Update_Ques_btn : document.getElementById("Update_Question")
 }
+
 
 //------------------------------------------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -70,8 +73,8 @@ function display_question(id,btn_id,values_obj) //this function is called when v
             Question_Pallet.Authored_by_anonymous_radio.checked = false;
         }
 
+        Question_Pallet.Authenticity_Count.innerHTML = (values_obj.Authenticity_Count == undefined) ? 0 : values_obj.Authenticity_Count;
         Question_Pallet.current_difficulty_span.innerHTML = values_obj.Difficulty;
-        
         Question_Pallet.authored_by_me_span.innerHTML = Cookies.get("Name");
         Question_Pallet.ques_desc.innerHTML = values_obj.Description;
         Question_Pallet.Difficulty_Slider.value = values_obj.Difficulty;
@@ -101,10 +104,12 @@ function add_to_table(id,values_obj) //function inserts data into table (here va
     var row = table.insertRow(2); //inserting at the 1
     var Question_ID_cell = row.insertCell(0); //inserting at the 0th col (starting)
     var display_col = row.insertCell(1); //inserting at the 0th col (starting)
-    
+    var Votes_cell = row.insertCell(2); //cell for displaying the Authentication Count
     //adding data to cells
+    
     Question_ID_cell.innerHTML = values_obj.Question_ID; //adding question id to table
     
+    Votes_cell.innerHTML = (values_obj.Authenticity_Count == undefined) ? 0 : values_obj.Authenticity_Count; 
     var drop_down_btn_id = "dropdown," + values_obj.Question_ID; //defining button ID
     var view_btn_img_id = "btnimg," + values_obj.Question_ID; //button image
     display_col.innerHTML = "<Button style = 'background-color: transparent;' id = " + drop_down_btn_id + " > <img src='GUI_Resources/Right_Arrow.png' id = " + view_btn_img_id + "> </Button>"; //adding button with this ID
@@ -113,7 +118,7 @@ function add_to_table(id,values_obj) //function inserts data into table (here va
     th_display_btn.addEventListener('click',display_question.bind(null,drop_down_btn_id,view_btn_img_id,values_obj)); //assigning event listener to this button to call the function
 }
 
-function Fetch_data_from_database(to_database,table_id) //function that fetches all the data from the database passed as JSON object
+function Fetch_data_from_database(to_database) //function that fetches all the data from the database passed as JSON object
 {
     console.log("loading");
     loading_overlay.hidden = false; //showing loading animation while fetching data from database
@@ -128,11 +133,13 @@ function Fetch_data_from_database(to_database,table_id) //function that fetches 
         console.log(values);
         console.log("loaded");
         loading_overlay.hidden = true; //hiding the loading overlay after the data has been fetched
-        fetch_MCQs.hidden = true; //hiding the fetch data button
         for(var i=0;i<values.length;i++)
         {
             console.log(values[i].Question_ID);
-            add_to_table(table_id,values[i]);
+            if ( ( values[i].Authenticity_Count == undefined) || (values[i].Authenticity_Count < 5 ) )
+                add_to_table("Questions_For_Review_table",values[i]);
+            else
+                add_to_table("MCQ_Bank_table",values[i]);
         }
     }
    });
@@ -167,26 +174,34 @@ else
 function edit_question() //this function is called when edit button is clicked
 {
     //toggling everything
-    Question_Pallet.ques_desc.disabled = !Question_Pallet.ques_desc.disabled;   
-
-    if((Question_Pallet.Edit_Btn_img.src).includes("Edit_Icon.png"))
+    if( parseInt(Question_Pallet.Authenticity_Count.innerHTML) < 5)
     {
-        (Question_Pallet.Edit_Btn_img).src = "GUI_Resources/Edit_Icon_pressed.png";
-        console.log("aaiya");
+        Question_Pallet.ques_desc.disabled = !Question_Pallet.ques_desc.disabled;   
+
+        if((Question_Pallet.Edit_Btn_img.src).includes("Edit_Icon.png"))
+        {
+            (Question_Pallet.Edit_Btn_img).src = "GUI_Resources/Edit_Icon_pressed.png";
+            console.log("aaiya");
+        }
+        else
+            Question_Pallet.Edit_Btn_img.src = "GUI_Resources/Edit_Icon.png";
+    
+        for(var i=0;i<4;i++)
+        {
+            Question_Pallet.MCQ_options_values[i].disabled = !Question_Pallet.MCQ_options_values[i].disabled;
+            Question_Pallet.Correct_opt[i].disabled = !Question_Pallet.Correct_opt[i].disabled;
+        }
+        
+        Question_Pallet.authoterd_by_me_radio.disabled = !Question_Pallet.authoterd_by_me_radio.disabled; 
+        Question_Pallet.Authored_by_anonymous_radio.disabled = !Question_Pallet.Authored_by_anonymous_radio.disabled;
+        Question_Pallet.Difficulty_Slider.disabled = !Question_Pallet.Difficulty_Slider.disabled;
+        Question_Pallet.update_row.hidden = !Question_Pallet.update_row.hidden; //toggling update row
     }
     else
-        Question_Pallet.Edit_Btn_img.src = "GUI_Resources/Edit_Icon.png";
-
-    for(var i=0;i<4;i++)
     {
-        Question_Pallet.MCQ_options_values[i].disabled = !Question_Pallet.MCQ_options_values[i].disabled;
-        Question_Pallet.Correct_opt[i].disabled = !Question_Pallet.Correct_opt[i].disabled;
+        alert("You Cant Edit a Already Verified and Authentic Question ");
     }
-    
-    Question_Pallet.authoterd_by_me_radio.disabled = !Question_Pallet.authoterd_by_me_radio.disabled; 
-    Question_Pallet.Authored_by_anonymous_radio.disabled = !Question_Pallet.Authored_by_anonymous_radio.disabled;
-    Question_Pallet.Difficulty_Slider.disabled = !Question_Pallet.Difficulty_Slider.disabled;
-    Question_Pallet.update_row.hidden = !Question_Pallet.update_row.hidden; //toggling update row
+   
 }
 
 
@@ -253,18 +268,170 @@ function Delete_Data() //function called when we press yes to delete confimation
         });
 }
 
+Question_Pallet.Upvote_Btn.onclick = function() //function called when upvote buttton is clicked
+{
+    if(Cookies.get(Question_Pallet.Cur_Question_ID.innerHTML) == undefined) //Means He has not upvoted or downvoted 
+    {
+        console.log("Upvote " + Question_Pallet.Cur_Question_ID.innerHTML);
+        var path_directory = "Question_Bank/MCQs/" + Question_Pallet.Cur_Question_ID.innerHTML;
+        get(ref( db , path_directory ))
+        .then((snapshot)=>{
+            if(snapshot.exists() ) 
+            {
+                //alert("exists");
+                if(snapshot.val().Authenticity_Count == undefined) //if no Authenticity Count parameter exists
+                {
+                    var updated_JSON_Object = {
+                        Authored_by : snapshot.val().Authored_by,
+                        Correct_Option : snapshot.val().Correct_Option,
+                        Description : snapshot.val().Description,
+                        Difficulty : snapshot.val().Difficulty,
+                        Option1 : snapshot.val().Option1,
+                        Option2 : snapshot.val().Option2,
+                        Option3 : snapshot.val().Option3,
+                        Option4 : snapshot.val().Option4,
+                        Question_ID : snapshot.val().Question_ID,
+                        Authenticity_Count : 1
+                    }
+                    update(ref(db,path_directory),updated_JSON_Object)
+                    .then(()=>{
+                        alert("Upvoted");
+                        Cookies.set(Question_Pallet.Cur_Question_ID.innerHTML,"Upvoted");
+                        location.href = "./Question_Bank.html";
+                    })
+                    .catch((error)=>{
+                        alert("unsuccessful while  updating , error = " + error);
+                    })
+                }
+                else
+                {
+                    var updated_JSON_Object = {
+                        Authored_by : snapshot.val().Authored_by,
+                        Correct_Option : snapshot.val().Correct_Option,
+                        Description : snapshot.val().Description,
+                        Difficulty : snapshot.val().Difficulty,
+                        Option1 : snapshot.val().Option1,
+                        Option2 : snapshot.val().Option2,
+                        Option3 : snapshot.val().Option3,
+                        Option4 : snapshot.val().Option4,
+                        Question_ID : snapshot.val().Question_ID,
+                        Authenticity_Count : parseInt(snapshot.val().Authenticity_Count) + 1
+                    }
+    
+                    update(ref( db , path_directory),updated_JSON_Object)
+                    .then(()=>{
+                        alert("Upvoted");
+                        Cookies.set(Question_Pallet.Cur_Question_ID.innerHTML,"Upvoted");
+                        location.href = "./Question_Bank.html";
+                    })
+                    .catch((error)=>{
+                        alert("unsuccessful while  updating , error = " + error);
+                    })
+                }
+            }
+            else
+            {
+                alert("not exists");
+            }
+        })
+        .catch((error)=>{
+            alert("unsuccessful, error = " + error);
+        });
+    }
+    else
+        alert("You have already Casted your vote");
+
+}
+
+Question_Pallet.Downvote_Btn.onclick = function()
+{
+    if(Cookies.get(Question_Pallet.Cur_Question_ID.innerHTML) == undefined)
+    {
+        console.log("Downvote " + Question_Pallet.Cur_Question_ID.innerHTML);
+        var path_directory = "Question_Bank/MCQs/" + Question_Pallet.Cur_Question_ID.innerHTML;
+        get(ref( db , path_directory ))
+        .then((snapshot)=>{
+            if(snapshot.exists() ) 
+            {
+                if(snapshot.val().Authenticity_Count == undefined) //if no Authenticity Count parameter exists
+                {
+                    var updated_JSON_Object = {
+                        Authored_by : snapshot.val().Authored_by,
+                        Correct_Option : snapshot.val().Correct_Option,
+                        Description : snapshot.val().Description,
+                        Difficulty : snapshot.val().Difficulty,
+                        Option1 : snapshot.val().Option1,
+                        Option2 : snapshot.val().Option2,
+                        Option3 : snapshot.val().Option3,
+                        Option4 : snapshot.val().Option4,
+                        Question_ID : snapshot.val().Question_ID,
+                        Authenticity_Count : -1
+                    }
+                    update(ref(db,path_directory),updated_JSON_Object)
+                    .then(()=>{
+                        alert("Downvoted");
+                        Cookies.set(Question_Pallet.Cur_Question_ID.innerHTML,"Downvoted");
+                        location.href = "./Question_Bank.html";
+                    })
+                    .catch((error)=>{
+                        alert("unsuccessful while  updating , error = " + error);
+                    })
+                }
+                else
+                {
+                    var updated_JSON_Object = {
+                        Authored_by : snapshot.val().Authored_by,
+                        Correct_Option : snapshot.val().Correct_Option,
+                        Description : snapshot.val().Description,
+                        Difficulty : snapshot.val().Difficulty,
+                        Option1 : snapshot.val().Option1,
+                        Option2 : snapshot.val().Option2,
+                        Option3 : snapshot.val().Option3,
+                        Option4 : snapshot.val().Option4,
+                        Question_ID : snapshot.val().Question_ID,
+                        Authenticity_Count : parseInt(snapshot.val().Authenticity_Count) - 1
+                    }
+                    
+                    update(ref(db,path_directory),updated_JSON_Object)
+                    .then(()=>{
+                        alert("Downvoted");
+                        Cookies.set(Question_Pallet.Cur_Question_ID.innerHTML,"Downvoted");
+                        location.href = "./Question_Bank.html";
+                    })
+                    .catch((error)=>{
+                        alert("unsuccessful while  updating , error = " + error);
+                    })
+                }
+            }
+            else
+            {
+                alert("not exists");
+            }
+        })
+        .catch((error)=>{
+            alert("unsuccessful, error = " + error);
+        });   
+    }
+    else
+        alert("You have already Casted your vote");
+}
+
 function view_confirmation() //this function enables the confirmation overlay when someone deletes a question
 {
-    confirmation_overlay.hidden = false;
+    if(parseInt(Question_Pallet.Authenticity_Count.innerHTML) < 5)
+        confirmation_overlay.hidden = false;
+    else
+        alert("You Can't Delete an Authentic and Verified Question");
 }
 
 function dont_delete() //function called when no confirmation button is pressed
 {
-    confirmation_overlay.hidden  = true;
+        confirmation_overlay.hidden  = true;   
 }
 
 logout_button.addEventListener('click',logout_user);
-fetch_MCQs.addEventListener('click',Fetch_data_from_database.bind(null,"Question_Bank/MCQs","MCQ_Bank_table"));
+//fetch_MCQs.addEventListener('click',Fetch_data_from_database.bind(null,"Question_Bank/MCQs","MCQ_Bank_table"));
+Fetch_data_from_database("Question_Bank/MCQs");
 Question_Pallet.Edit_Btn.addEventListener('click',edit_question);
 Question_Pallet.Update_Ques_btn.addEventListener('click',Update_Data); //adding click event listener to Update Question Button
 Question_Pallet.Delete_Btn.addEventListener('click',view_confirmation);
