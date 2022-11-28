@@ -121,16 +121,19 @@ function add_to_table(table_id) //function inserts data into table
         for (const [key, value] of Object.entries(fetched_Question_Bank_dict)) 
         {
             //console.log(key, value);
-            var row = table.insertRow(2);
-            var question_ID_Cell = row.insertCell(0);
-            var add_image_cell = row.insertCell(1);
-            question_ID_Cell.innerHTML = value.Question_ID;
-    
-            var add_btn_id = "add_btn," + value.Question_ID;
-            var add_btn_img_id = "img," + value.Question_ID;
-            add_image_cell.innerHTML =  "<button class='add_question_btn' id = " + add_btn_id + "> <img src= 'GUI_Resources/add.png' id= "+ add_btn_img_id + "> </button>";
-            var add_btn = document.getElementById(add_btn_id);
-            add_btn.addEventListener('click',Add_Remove_Question.bind(null,value.Question_ID)); //Adding click event listener to all the add buttons
+            if( !(value.Authenticity_Count == undefined  || parseInt(value.Authenticity_Count) < 5 ) )
+            {
+                var row = table.insertRow(2);
+                var question_ID_Cell = row.insertCell(0);
+                var add_image_cell = row.insertCell(1);
+                question_ID_Cell.innerHTML = value.Question_ID;
+        
+                var add_btn_id = "add_btn," + value.Question_ID;
+                var add_btn_img_id = "img," + value.Question_ID;
+                add_image_cell.innerHTML =  "<button class='add_question_btn' id = " + add_btn_id + "> <img src= 'GUI_Resources/add.png' id= "+ add_btn_img_id + "> </button>";
+                var add_btn = document.getElementById(add_btn_id);
+                add_btn.addEventListener('click',Add_Remove_Question.bind(null,value.Question_ID)); //Adding click event listener to all the add buttons
+            }
         }
     }
     else // else table id is of {Question Added table} so re-iterate 
@@ -181,6 +184,7 @@ function Add_Remove_Question(Question_ID) //function called when user presses an
         Desc_overlay_pallet_obj.add_to_test_btn.onclick = function() //this function is called when a user clicks on {Add to Test} button (in overlay)
         {
             //console.log("adding + " + Desc_overlay_pallet_obj.ques_id.innerHTML + " with marks = " + Desc_overlay_pallet_obj.Marks_alloted.value);
+            
             desc_overlay.hidden = true; //Hiding the Overlay
             
             var selected_question_obj = { //Making a JSON object to store currently added questino data
