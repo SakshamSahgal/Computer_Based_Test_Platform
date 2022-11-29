@@ -26,7 +26,9 @@ var confirmation_overlay = document.getElementById("Overlay");
 var loading_overlay = document.getElementById("Load_overlay");
 //Question Pallet elements Object
 var Question_Pallet = { //JSON object for HTML elements of question pallet
+    Cross_Btn : document.getElementById("Cross_Btn"),
     Authenticity_Count : document.getElementById("Authenticity_Vote"),
+    Subject_Cell : document.getElementById("Subject_Cell"),
     Upvote_Btn : document.getElementById("Upvote_Btn"),
     Downvote_Btn : document.getElementById("Downvote_Btn"),
     Edit_Btn : document.getElementById("Edit_Button"), 
@@ -46,6 +48,14 @@ var Question_Pallet = { //JSON object for HTML elements of question pallet
     Update_Ques_btn : document.getElementById("Update_Question")
 }
 
+Question_Pallet.Cross_Btn.onclick = function()
+{
+    console.log("button id = ");
+    console.log("btnimg,"  + Question_Pallet.Cur_Question_ID.innerHTML);
+    var image_id = "btnimg,"  + Question_Pallet.Cur_Question_ID.innerHTML;
+    document.getElementById(image_id).src = "GUI_Resources/Right_Arrow.png";
+    Question_Pallet_holder_div.hidden = true;
+}
 
 //------------------------------------------------------------------------------- Functions -------------------------------------------------------------------
 
@@ -73,6 +83,7 @@ function display_question(id,btn_id,values_obj) //this function is called when v
             Question_Pallet.Authored_by_anonymous_radio.checked = false;
         }
 
+        Question_Pallet.Subject_Cell.innerHTML = (values_obj.Subject);
         Question_Pallet.Authenticity_Count.innerHTML = (values_obj.Authenticity_Count == undefined) ? 0 : values_obj.Authenticity_Count;
         Question_Pallet.current_difficulty_span.innerHTML = values_obj.Difficulty;
         Question_Pallet.authored_by_me_span.innerHTML = Cookies.get("Name");
@@ -136,10 +147,25 @@ function Fetch_data_from_database(to_database) //function that fetches all the d
         for(var i=0;i<values.length;i++)
         {
             console.log(values[i].Question_ID);
-            if ( ( values[i].Authenticity_Count == undefined) || (values[i].Authenticity_Count < 5 ) )
-                add_to_table("Questions_For_Review_table",values[i]);
+            if ( values[i].Authenticity_Count < 5 )
+            {
+                if(values[i].Subject == "Automata")
+                    add_to_table("Questions_For_Review_table_Autometa",values[i]);
+                else if(values[i].Subject == "OS")
+                    add_to_table("Questions_For_Review_table_OS",values[i]);
+                else
+                    add_to_table("Questions_For_Review_table_Algorithm",values[i]);
+            }
             else
-                add_to_table("MCQ_Bank_table",values[i]);
+            {
+                if(values[i].Subject == "Automata")
+                    add_to_table("MCQ_Bank_table_Automata",values[i]);
+                else if(values[i].Subject == "OS")
+                    add_to_table("MCQ_Bank_table_OS",values[i]);
+                else
+                    add_to_table("MCQ_Bank_table_Algorithm",values[i]);
+            }
+               
         }
     }
    });
@@ -278,34 +304,8 @@ Question_Pallet.Upvote_Btn.onclick = function() //function called when upvote bu
         .then((snapshot)=>{
             if(snapshot.exists() ) 
             {
-                //alert("exists");
-                if(snapshot.val().Authenticity_Count == undefined) //if no Authenticity Count parameter exists
-                {
                     var updated_JSON_Object = {
-                        Authored_by : snapshot.val().Authored_by,
-                        Correct_Option : snapshot.val().Correct_Option,
-                        Description : snapshot.val().Description,
-                        Difficulty : snapshot.val().Difficulty,
-                        Option1 : snapshot.val().Option1,
-                        Option2 : snapshot.val().Option2,
-                        Option3 : snapshot.val().Option3,
-                        Option4 : snapshot.val().Option4,
-                        Question_ID : snapshot.val().Question_ID,
-                        Authenticity_Count : 1
-                    }
-                    update(ref(db,path_directory),updated_JSON_Object)
-                    .then(()=>{
-                        alert("Upvoted");
-                        Cookies.set(Question_Pallet.Cur_Question_ID.innerHTML,"Upvoted");
-                        location.href = "./Question_Bank.html";
-                    })
-                    .catch((error)=>{
-                        alert("unsuccessful while  updating , error = " + error);
-                    })
-                }
-                else
-                {
-                    var updated_JSON_Object = {
+                        Subject : snapshot.val().Subject,
                         Authored_by : snapshot.val().Authored_by,
                         Correct_Option : snapshot.val().Correct_Option,
                         Description : snapshot.val().Description,
@@ -327,7 +327,6 @@ Question_Pallet.Upvote_Btn.onclick = function() //function called when upvote bu
                     .catch((error)=>{
                         alert("unsuccessful while  updating , error = " + error);
                     })
-                }
             }
             else
             {
@@ -353,33 +352,8 @@ Question_Pallet.Downvote_Btn.onclick = function()
         .then((snapshot)=>{
             if(snapshot.exists() ) 
             {
-                if(snapshot.val().Authenticity_Count == undefined) //if no Authenticity Count parameter exists
-                {
                     var updated_JSON_Object = {
-                        Authored_by : snapshot.val().Authored_by,
-                        Correct_Option : snapshot.val().Correct_Option,
-                        Description : snapshot.val().Description,
-                        Difficulty : snapshot.val().Difficulty,
-                        Option1 : snapshot.val().Option1,
-                        Option2 : snapshot.val().Option2,
-                        Option3 : snapshot.val().Option3,
-                        Option4 : snapshot.val().Option4,
-                        Question_ID : snapshot.val().Question_ID,
-                        Authenticity_Count : -1
-                    }
-                    update(ref(db,path_directory),updated_JSON_Object)
-                    .then(()=>{
-                        alert("Downvoted");
-                        Cookies.set(Question_Pallet.Cur_Question_ID.innerHTML,"Downvoted");
-                        location.href = "./Question_Bank.html";
-                    })
-                    .catch((error)=>{
-                        alert("unsuccessful while  updating , error = " + error);
-                    })
-                }
-                else
-                {
-                    var updated_JSON_Object = {
+                        Subject : snapshot.val().Subject,
                         Authored_by : snapshot.val().Authored_by,
                         Correct_Option : snapshot.val().Correct_Option,
                         Description : snapshot.val().Description,
@@ -401,7 +375,6 @@ Question_Pallet.Downvote_Btn.onclick = function()
                     .catch((error)=>{
                         alert("unsuccessful while  updating , error = " + error);
                     })
-                }
             }
             else
             {

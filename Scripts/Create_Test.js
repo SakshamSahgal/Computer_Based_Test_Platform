@@ -107,6 +107,7 @@ function fetch_Question_Bank() //this function is called when we click on the fe
                     fetched_Question_Bank_dict[String(values[i].Question_ID)] = values[i];
                     //add_to_table(table_id,values[i]);
                 }
+                
                 add_to_table("Question_to_add_MCQ_table");
             }
     });
@@ -114,30 +115,71 @@ function fetch_Question_Bank() //this function is called when we click on the fe
 
 function add_to_table(table_id) //function inserts data into table
 {
-    var table = document.getElementById(table_id);
+    var table;
     
     if(table_id == "Question_to_add_MCQ_table") //if table ID is of {Question to add} table
     {
         for (const [key, value] of Object.entries(fetched_Question_Bank_dict)) 
         {
             //console.log(key, value);
-            if( !(value.Authenticity_Count == undefined  || parseInt(value.Authenticity_Count) < 5 ) )
+            
+            if(value.Subject == "Automata")
             {
-                var row = table.insertRow(2);
-                var question_ID_Cell = row.insertCell(0);
-                var add_image_cell = row.insertCell(1);
-                question_ID_Cell.innerHTML = value.Question_ID;
-        
-                var add_btn_id = "add_btn," + value.Question_ID;
-                var add_btn_img_id = "img," + value.Question_ID;
-                add_image_cell.innerHTML =  "<button class='add_question_btn' id = " + add_btn_id + "> <img src= 'GUI_Resources/add.png' id= "+ add_btn_img_id + "> </button>";
-                var add_btn = document.getElementById(add_btn_id);
-                add_btn.addEventListener('click',Add_Remove_Question.bind(null,value.Question_ID)); //Adding click event listener to all the add buttons
+                table = document.getElementById("Question_to_add_MCQ_table_Autometa");
+                if( !( parseInt(value.Authenticity_Count) < 5 ) )
+                {
+                    var row = table.insertRow(2);
+                    var question_ID_Cell = row.insertCell(0);
+                    var add_image_cell = row.insertCell(1);
+                    question_ID_Cell.innerHTML = value.Question_ID;
+            
+                    var add_btn_id = "add_btn," + value.Question_ID;
+                    var add_btn_img_id = "img," + value.Question_ID;
+                    add_image_cell.innerHTML =  "<button class='add_question_btn' id = " + add_btn_id + "> <img src= 'GUI_Resources/add.png' id= "+ add_btn_img_id + "> </button>";
+                    var add_btn = document.getElementById(add_btn_id);
+                    add_btn.addEventListener('click',Add_Remove_Question.bind(null,value.Question_ID)); //Adding click event listener to all the add buttons
+                }
             }
+            else if(value.Subject == "OS")
+            {
+                table = document.getElementById("Question_to_add_MCQ_table_OS");
+                if( !( parseInt(value.Authenticity_Count) < 5 ) )
+                {
+                    var row = table.insertRow(2);
+                    var question_ID_Cell = row.insertCell(0);
+                    var add_image_cell = row.insertCell(1);
+                    question_ID_Cell.innerHTML = value.Question_ID;
+            
+                    var add_btn_id = "add_btn," + value.Question_ID;
+                    var add_btn_img_id = "img," + value.Question_ID;
+                    add_image_cell.innerHTML =  "<button class='add_question_btn' id = " + add_btn_id + "> <img src= 'GUI_Resources/add.png' id= "+ add_btn_img_id + "> </button>";
+                    var add_btn = document.getElementById(add_btn_id);
+                    add_btn.addEventListener('click',Add_Remove_Question.bind(null,value.Question_ID)); //Adding click event listener to all the add buttons
+                }
+            }
+            else
+            {
+                table = document.getElementById("Question_to_add_MCQ_table_Algorithm");
+                if( !( parseInt(value.Authenticity_Count) < 5 ) )
+                {
+                    var row = table.insertRow(2);
+                    var question_ID_Cell = row.insertCell(0);
+                    var add_image_cell = row.insertCell(1);
+                    question_ID_Cell.innerHTML = value.Question_ID;
+            
+                    var add_btn_id = "add_btn," + value.Question_ID;
+                    var add_btn_img_id = "img," + value.Question_ID;
+                    add_image_cell.innerHTML =  "<button class='add_question_btn' id = " + add_btn_id + "> <img src= 'GUI_Resources/add.png' id= "+ add_btn_img_id + "> </button>";
+                    var add_btn = document.getElementById(add_btn_id);
+                    add_btn.addEventListener('click',Add_Remove_Question.bind(null,value.Question_ID)); //Adding click event listener to all the add buttons
+                }
+            }
+
         }
     }
     else // else table id is of {Question Added table} so re-iterate 
     {
+        table = document.getElementById("Question_Added_table");
         var delete_index = 2; //since we want to start deleting from index 2 (index 0 and index 1 are headings)
         while(delete_index < table.rows.length) //deleting all the previous rows 
             table.deleteRow(delete_index);

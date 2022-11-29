@@ -6,7 +6,7 @@
     width: 782px;
     position: absolute;
     left: 57%;  
-    top: 25%;
+    top: 20%;
 }
 
 
@@ -23,6 +23,9 @@
 
 #Question_pallet_table
 {
+    position: relative;
+    left: 32%;
+    top: 17%;
     border: dotted black 5px; 
 }
 #loading_img
@@ -37,7 +40,7 @@
 {
   height: 100%;
   width: 100%;
-  z-index: 3;
+  z-index: 4;
   position: fixed; /* Stay in place */
   left: 0;
   top: 0;
@@ -45,6 +48,17 @@
   backdrop-filter: blur(6px);
 }
 
+#Overlay_for_Question_Pallet
+{
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+  backdrop-filter: blur(6px);
+}
 #confirmation_div
 {
     position: absolute;
@@ -101,10 +115,10 @@
     border-radius: 10px;
     position: absolute;
     border-style: dotted dashed solid double;
-    width: 420px;
+    width: 800px;
     height: 200px;
-    margin-left: 2%;
-    margin-top: 2%;
+    left: 5%;
+    top: 18%;
     z-index: 1;  
     display: flex;
     flex-direction: column;
@@ -113,9 +127,8 @@
     background-color:#e8e0d77e
 }
 
-#MCQ_Bank_table tr /*CSS for MCQ_Bank_table table Rows */
+#MCQ_Bank_table_Automata tr /*CSS for MCQ_Bank_table table Rows */
 {
-    width: 300px;
     border: solid;
     border-color: black;
     border-width: 0px;
@@ -123,11 +136,47 @@
     background-color: rgba(240, 248, 255, 0.37);
 }
 
-#MCQ_Bank_table /* For */
+#MCQ_Bank_table_Automata /* For */
 {
-    width: 360px;
+    width: 240px;
     position: absolute;
-    left: 5%;
+    left: 2%;
+    top: 2%;
+    border: black;
+}
+
+#MCQ_Bank_table_OS tr /*CSS for MCQ_Bank_table table Rows */
+{
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+#MCQ_Bank_table_OS /* For */
+{
+    width: 240px;
+    position: absolute;
+    left: 33%;
+    top: 2%;
+    border: black;
+}
+
+#MCQ_Bank_table_Algorithm tr
+{
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+#MCQ_Bank_table_Algorithm
+{
+    width: 240px;
+    position: absolute;
+    left: 64%;
     top: 2%;
     border: black;
 }
@@ -139,10 +188,10 @@
     border-radius: 10px;
     position: absolute;
     border-style: dotted dashed solid double;
-    width: 420px;
+    width: 800px;
     height: 200px;
-    margin-left: 25%;
-    margin-top: 2%;
+    left: 50%;
+    top: 18%;
     z-index: 1;  
     display: flex;
     flex-direction: column;
@@ -151,7 +200,7 @@
     background-color:#e8e0d77e;
 }
 
-#Questions_For_Review_table tr /*CSS for Question For review table Rows */
+#Questions_For_Review_table_Autometa tr /*CSS for Question For review table Rows */
 {
     width: 300px;
     border: solid;
@@ -162,15 +211,62 @@
 }
 
 
-#Questions_For_Review_table
+#Questions_For_Review_table_Autometa
+{
+    position: absolute;
+    width: 240px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    left: 2%;
+    top: 3%;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+#Questions_For_Review_table_OS tr
 {
     width: 300px;
     border: solid;
     border-color: black;
     border-width: 0px;
     text-align: center;
-    position: relative;
-    left: 10%;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+#Questions_For_Review_table_OS 
+{
+    position: absolute;
+    width: 240px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    left: 34%;
     top: 3%;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+
+#Questions_For_Review_table_Algorithm
+{
+    position: absolute;
+    width: 240px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+    left: 66%;
+    top: 3%;
+    background-color: rgba(240, 248, 255, 0.37);
+}
+
+#Questions_For_Review_table_Algorithm tr
+{
+    width: 300px;
+    border: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
     background-color: rgba(240, 248, 255, 0.37);
 }

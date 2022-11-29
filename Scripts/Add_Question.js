@@ -66,6 +66,17 @@ function Submit_Question()
         correct_option = 3;
     else
         correct_option = 4;
+
+    
+    var current_subject;
+
+    if(document.getElementById("sub_Algorithm").checked == true)
+        current_subject = "Algorithm";
+    else if(document.getElementById("sub_Automata").checked == true)
+        current_subject = "Automata";
+    else
+        current_subject = "OS";
+    
   
         
     console.group("Question_Submission_Log");
@@ -77,6 +88,7 @@ function Submit_Question()
     console.log(Mcq_opt_3.value);
     console.log(Mcq_opt_4.value);
     console.log(correct_option);
+
 
 
     console.log("unique id = " + Date.now());
@@ -92,6 +104,8 @@ function Submit_Question()
         var path_directory = to_database + Question_ID;
 
         var Question = {
+            Authenticity_Count : 0,
+            Subject : current_subject,
             Question_ID : Question_ID,
             Authored_by : authored_by,
             Difficulty : Difficulty_slider.value,
