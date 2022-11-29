@@ -45,6 +45,7 @@ Problem Setter -
 
 			1. Add Question - Redirects to AddQuestion.html
 			2. Question Bank - Redirects to Question Bank.html
+			3. Create test - Redirects to Create_Test.html
 
 	AddQuestion.html
 
@@ -55,16 +56,17 @@ Problem Setter -
 
 			1. Can view the whole list of Questions from the database
 			2. Can click on the view button of each question to get detailed view of each question
-			3. Can edit each question in the database
-			4. Can Delete Any Question from the database
+			3. Can upvote or downvote a question based on its authenticity. Vote can be casted only once per problem setter.
+			3. Can edit each question in the database whose authenctic count is less than 5.
+			4. Can Delete Any Question from the database whose authentic count is less than 5.
 	
 	Create Test.html
 			
-			1. Provides you a way to create Custom tests
-			2. Can Add multiple Questions to the test from the Question Bank
-			3. Can Set custom Names for the tests
-			4. Can Set custom Duration for the each tests
-			5. Can Set custom marks from each question in the test
+			1. Provides you a way to create Custom tests.
+			2. Can add only verified questions (authentic count >= 5) to the test from the Question Bank.
+			3. Can Set custom Names for the tests.
+			4. Can Set custom Duration for the each tests.
+			5. Can Set custom marks from each question in the test.
 			
 Student Portal - 
 	
@@ -78,6 +80,7 @@ Student Portal -
 			1. Can view each Question in the test By Clicking on the Question No
 			2. The questions are Randomly shuffeled each time 
 			3. You can view the complete Detail of each Question , including the marks it carry
+			4. Answered questions are marked with green.
 			
 	Result_Section.html 
 	
