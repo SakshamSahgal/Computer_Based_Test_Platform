@@ -40,23 +40,29 @@ function Display_Result(Result_Data_Obj)
     var table = document.getElementById("Result_Table");
     Test_ID_Cell.innerHTML = Result_Data_Obj.Test_ID;
     Score_Cell.innerHTML = Result_Data_Obj.Score;
-    for(var i=0;i<Result_Data_Obj.Attempted.length;i++) //iterating over the attempted array
+    if(Result_Data_Obj.Attempted != undefined) //if actually attempted 
     {
-        var row  = table.insertRow(2);
-        var Question_ID_cell = row.insertCell(0);
-        var Question_Marks_cell = row.insertCell(1);
-        var Attempted_Option_cell = row.insertCell(2);
-        var Correct_Option_cell = row.insertCell(3);
-        var Status_Cell = row.insertCell(4);
-        Question_ID_cell.innerHTML = Result_Data_Obj.Attempted[i].Question_ID;
-        Question_Marks_cell.innerHTML = Result_Data_Obj.Attempted[i].Marks;
-        Attempted_Option_cell.innerHTML = Result_Data_Obj.Attempted[i].Choosed_Option;
-        Correct_Option_cell.innerHTML = Result_Data_Obj.Attempted[i].Correct_Option;
-        if(Result_Data_Obj.Attempted[i].Correct_Option == Result_Data_Obj.Attempted[i].Choosed_Option)
-            Status_Cell.innerHTML = "<img src = 'GUI_Resources/accept.png' >";
-        else
-        Status_Cell.innerHTML = "<img src = 'GUI_Resources/cancel.png' >";
+        for(var i=0;i<Result_Data_Obj.Attempted.length;i++) //iterating over the attempted array
+        {
+            var row  = table.insertRow(2);
+            var Question_ID_cell = row.insertCell(0);
+            var Question_Marks_cell = row.insertCell(1);
+            var Attempted_Option_cell = row.insertCell(2);
+            var Correct_Option_cell = row.insertCell(3);
+            var Status_Cell = row.insertCell(4);
+            Question_ID_cell.innerHTML = Result_Data_Obj.Attempted[i].Question_ID;
+            Question_Marks_cell.innerHTML = Result_Data_Obj.Attempted[i].Marks;
+            Attempted_Option_cell.innerHTML = Result_Data_Obj.Attempted[i].Choosed_Option;
+            Correct_Option_cell.innerHTML = Result_Data_Obj.Attempted[i].Correct_Option;
+
+            if(Result_Data_Obj.Attempted[i].Correct_Option == Result_Data_Obj.Attempted[i].Choosed_Option)
+                Status_Cell.innerHTML = "<img src = 'GUI_Resources/accept.png' >";
+            else
+                Status_Cell.innerHTML = "<img src = 'GUI_Resources/cancel.png' >";
+        }
     }
+    else
+        alert("You havent attempted the test");
     
 }
 
@@ -78,7 +84,7 @@ function Fetch_Data()
         }
         else
         {
-            alert("not exists");
+            alert("You didnt Attempted the test");
         }
     })
     .catch((error)=>{

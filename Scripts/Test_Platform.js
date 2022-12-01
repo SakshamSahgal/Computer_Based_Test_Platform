@@ -386,6 +386,7 @@ function Calculate_Result() //this function calculates the result of the user
 {
     var Attempted_Array = []; // An array of objects that stores JSON { Choosed_Option , Correct_Option , Marks , Question_ID }
     var score = 0;
+    
     for (const [key, value] of Object.entries(Candidate_Answers))
     {
         console.log("Key = " + key + " value  " + value); //Key -> Question ID , value -> Marks
