@@ -4,7 +4,7 @@
 </head>
 <body>
     <link rel="stylesheet" href="CSS/CommonCSS.css">
-    <link rel="stylesheet" href="CSS/Test_Portal.css">
+    <link rel="stylesheet" href="CSS/Test_Platform.css">
     <div id="Top_Bar"> <h2 style="text-align:center ; padding-top: 15px;"> TEST PORTAL</h2></div>
     
     <div id="Welcome_box">
@@ -41,14 +41,26 @@
         </div>
     </div>
 
-    <div id="Overlay">
-        <div id="confirmation_div">
-            <table id="confirmation_table">
+    <!-- Start Test Overlay -->
+    <div id="Start_Test_Overlay" hidden>
+        <div id="Start_test_Confirmation_div">
+            <table id="Start_test_Confirmation_table">
                 <tr><td colspan="2" id="">Start_Test?</td></tr>
-                <tr><td><button id="confirmation_ans_no">NO</button></td><td><button id="confirmation_ans_yes">YES</button></td></tr>
+                <tr><td><button id="Start_test_Confirmation_ans_no">NO</button></td><td><button id="Start_test_Confirmation_ans_yes">YES</button></td></tr>
             </table>
         </div>
     </div>
+
+    <!-- Resume Test Overlay -->
+    <div id="Resume_Test_Overlay" hidden>
+        <div id="Resume_Test_Confirmation_div">
+            <table id="Resume_Test_Confirmation_table">
+                <tr><td colspan="2" id="">Resume Test?</td></tr>
+                <tr><td><button id="Resume_Test_Confirmation_ans_no">NO</button></td><td><button id="Resume_Test_Confirmation_ans_yes">YES</button></td></tr>
+            </table>
+        </div>
+    </div>
+    
 
     <div id="Overlay_for_submission" hidden>
         <div id="submission_confirmation_div">
@@ -65,6 +77,6 @@
 
     <!-- importing js cookie CDN library -->
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>  
-<script type="module" src="Scripts/Test_Portal.js"></script>
+<script type="module" src="Scripts/Test_Platform.js"></script>
 </body>
 </html>

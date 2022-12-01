@@ -2,7 +2,8 @@
 
 
 /*--------------------------------------------------------------------------------CONFIRMATION OVERLAY---------------------------------------------------------------------------*/
-#Overlay
+
+#Start_Test_Overlay
 {
   height: 100%;
   width: 100%;
@@ -14,13 +15,7 @@
   backdrop-filter: blur(6px);
 }
 
-#Question_Details_table td
-{
-    /* border: 2px solid black; */
-    border-radius: 20px;
-}
-
-#confirmation_div
+#Start_test_Confirmation_div
 {
     position: absolute;
     top:45%;
@@ -32,7 +27,39 @@
     border-radius: 25px;
 }
 
-#confirmation_table
+#Start_test_Confirmation_table
+{
+    position: absolute;
+    text-align: center;
+    top: 18%;
+    left: 28%;
+}
+
+#Resume_Test_Overlay
+{
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+  position: fixed; /* Stay in place */
+  left: 0;
+  top: 0;
+  background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
+  backdrop-filter: blur(6px);
+}
+
+#Resume_Test_Confirmation_table
+{
+    position: absolute;
+    top:45%;
+    left: 44%;
+    width: 12%;
+    height: 8%;
+    text-align: center;
+    background-color: azure;
+    border-radius: 25px;
+}
+
+#Start_test_Confirmation_table
 {
     position: absolute;
     text-align: center;
@@ -43,6 +70,11 @@
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
+#Question_Details_table td
+{
+    /* border: 2px solid black; */
+    border-radius: 20px;
+}
 /*----------------------------------------------------Load Overlay--------------------------------------------------------*/
 
 #loading_img  /*CSS for loading image */
@@ -63,6 +95,7 @@
     background-color: rgba(7, 7, 7, 0.55); /* Black w/opacity */
     backdrop-filter: blur(6px);
 }
+
 /*---------------------------------------------------Submit Overlay-----------------------------------------------------------------------------------------*/
 
 #Overlay_for_submission
@@ -123,8 +156,8 @@
     border-style: dotted dashed solid double;
     width: 340px;
     padding-top: 2%;
-    margin-top: 5%;
-    margin-left: 80%;
+    top: 20%;
+    left: 80%;
     z-index: 0;  
     display: flex;
     flex-direction: column;

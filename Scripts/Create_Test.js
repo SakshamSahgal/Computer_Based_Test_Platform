@@ -226,20 +226,25 @@ function Add_Remove_Question(Question_ID) //function called when user presses an
         Desc_overlay_pallet_obj.add_to_test_btn.onclick = function() //this function is called when a user clicks on {Add to Test} button (in overlay)
         {
             //console.log("adding + " + Desc_overlay_pallet_obj.ques_id.innerHTML + " with marks = " + Desc_overlay_pallet_obj.Marks_alloted.value);
+            if(Desc_overlay_pallet_obj.Marks_alloted.value != "")
+            {
+                desc_overlay.hidden = true; //Hiding the Overlay
             
-            desc_overlay.hidden = true; //Hiding the Overlay
-            
-            var selected_question_obj = { //Making a JSON object to store currently added questino data
-                Question_ID : Desc_overlay_pallet_obj.ques_id.innerHTML,
-                Marks : Desc_overlay_pallet_obj.Marks_alloted.value
-            }
-            
-            Cur_Test_Obj.max_Marks.innerHTML = parseInt(Cur_Test_Obj.max_Marks.innerHTML) +  parseInt(selected_question_obj.Marks); //increasing the max marks counter
-            Cur_Test_Obj.No_of_Questions.innerHTML = parseInt(Cur_Test_Obj.No_of_Questions.innerHTML) + parseInt(1); //increasing the number of questions counter
+                var selected_question_obj = { //Making a JSON object to store currently added questino data
+                    Question_ID : Desc_overlay_pallet_obj.ques_id.innerHTML,
+                    Marks : Desc_overlay_pallet_obj.Marks_alloted.value
+                }
+                
+                Cur_Test_Obj.max_Marks.innerHTML = parseInt(Cur_Test_Obj.max_Marks.innerHTML) +  parseInt(selected_question_obj.Marks); //increasing the max marks counter
+                Cur_Test_Obj.No_of_Questions.innerHTML = parseInt(Cur_Test_Obj.No_of_Questions.innerHTML) + parseInt(1); //increasing the number of questions counter
 
-            selected_Questions_dict[Question_ID] = (JSON.parse(JSON.stringify(selected_question_obj))); //Adding pair to dictionary with key as cur question id and values as {selected question object}
-            this_btn.src =  "GUI_Resources/cancel.png"; //changing its source
-            add_to_table("Question_Added_table");  //displaying the updated table
+                selected_Questions_dict[Question_ID] = (JSON.parse(JSON.stringify(selected_question_obj))); //Adding pair to dictionary with key as cur question id and values as {selected question object}
+                this_btn.src =  "GUI_Resources/cancel.png"; //changing its source
+                add_to_table("Question_Added_table");  //displaying the updated table
+            }
+            else
+                alert("Please enter valid marks!");
+            
         }
     }
     else
